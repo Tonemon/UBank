@@ -1,0 +1,69 @@
+.bg-blue{
+	background-color:#006bb3 !important
+}
+
+html,body{
+	height:100%;
+	width: 100%;
+}
+
+.carousel,.item,.active{
+	height:100%;
+	width: 100%;
+ }
+.carousel-inner{
+	height:50%;
+	width: 100%;
+}
+
+.bg-blue-light{
+	background:#006bb3;
+	background:-webkit-linear-gradient(#006bb3,#006bb3);
+	background:linear-gradient(#006bb3,#006bb3);
+	color:#fff;background:url(/vendor/img/bg-pattern.png),#006bb3;
+}
+
+.signup{
+	background:#004d80;
+	background:-webkit-linear-gradient(#004d80,#004d80);
+	background:linear-gradient(#004d80,#004d80);
+	color:#fff;background:url(/vendor/img/bg-pattern.png),#004d80;
+	position:relative;
+	padding:40px 0;
+}
+
+.bg-foot{
+	background:#006bb3;
+	background:-webkit-linear-gradient(#006bb3,#006bb3);
+	background:linear-gradient(#006bb3,#006bb3);
+	position:relative;
+	padding:10px 0;
+}
+
+.features{
+	position:relative;
+	padding:70px 0;
+}
+
+.about{
+	position:relative;
+	padding:40px 0;
+}
+
+.business{
+	position:relative;
+	padding:40px 0;
+}
+
+.contact{
+	position:relative;
+	padding:60px 0;
+	background:#f8f9fa;
+	background:-webkit-linear-gradient(#f8f9fa,#f8f9fa);
+	background:linear-gradient(#f8f9fa,#f8f9fa);
+}
+
+.clients{
+	position:relative;
+	padding:30px 0;
+}
