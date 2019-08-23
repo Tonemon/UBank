@@ -22,4 +22,4 @@ subdomain will be present, include it in the next version of the backup.
 <i>Coming soon after the Big Remake (new release).</i>
 
 # Update Log
-Update Log discontinued due to frequent README.md file changes. All commit information can be found [on the commits page](https://github.com/Tonemon/UBank/commits/masterhttps://github.com/Tonemon/UBank/commits/master) or on the [branches page](https://github.com/Tonemon/UBank/branches).
+Update Log discontinued due to frequent README.md file changes. All commit information can be found [on the commits page](https://github.com/Tonemon/UBank/commits/master) or on the [branches page](https://github.com/Tonemon/UBank/branches).
