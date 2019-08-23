@@ -1,35 +1,56 @@
 <?php 
-if(isset($_REQUEST['submitBtn'])){
+  if (isset($_REQUEST['submit_login'])){
     include '_inc/dbconn.php';
-    $username=$_REQUEST['uname'];
+    $login_user = $_REQUEST['loginuser'];
+      
+    // password salting (for security reasons)
+    $salt = "@g26jQsG&nh*&#8v";
+    $login_password = sha1($_REQUEST['loginpassword'].$salt);
     
-    //salting of password
-    $salt="@g26jQsG&nh*&#8v";
-    $password= sha1($_REQUEST['pwd'].$salt);
-  
-    $sql="SELECT email,password FROM customer WHERE email='$username' AND password='$password'";
-    $result=mysql_query($sql) or die(mysql_error());
-    $rws=  mysql_fetch_array($result);
-    
-    $user=$rws[0];
-    $pwd=$rws[1];    
-    
-    if($user==$username && $pwd==$password){
+
+    if (preg_match("/@/", $login_user)) { // check for @, if present:
+        // getting usefull information for session creation (with email)
+        $sql = "SELECT username,password,accstatus,email,id,name FROM UBankMAIN.users WHERE email='$login_user' AND password='$login_password'";
+        $result = mysql_query($sql) or die(mysql_error());
+        $res =  mysql_fetch_array($result);
+
+    } else { // no @ present, so login with username:
+        // getting usefull information for session creation (with username)
+        $sql = "SELECT username,password,accstatus,email,id,name FROM UBankMAIN.users WHERE username='$login_user' AND password='$login_password'";
+        $result = mysql_query($sql) or die(mysql_error());
+        $res =  mysql_fetch_array($result);
+    }
+
+    $db_user = $res[0];
+    $db_pass = $res[1];
+    $db_accstatus = $res[2];
+    $db_email = $res[3];
+    $db_id = $res[4];
+    $db_name = $res[5];
+
+    if (($login_user == $db_user || $login_user == $db_email) && $login_password == $db_pass){
+      if ($db_accstatus == "ACTIVE"){
         session_start();
-        $_SESSION['customer_login']=1;
-        $_SESSION['cust_id']=$username;
-		
-		header('location:banking'); 
+        $_SESSION['session_user_start'] = 1;
+        $_SESSION['session_user_username'] = $db_user;
+        $_SESSION['session_user_email'] = $db_email;
+        $_SESSION['session_user_id'] = $db_id;
+        $_SESSION['session_user_name'] = $db_name;
+        
+        header('location:banking');
+      } else {
+        header('location:?disabled=1');
+      }
     } else {
-		header('location:?error=1'); 
-	}
-}
+  	 header('location:?error=1'); 
+  	}
+  }
 ?>
 <?php 
-session_start();
-        
-if(isset($_SESSION['customer_login'])) 
+  session_start();
+  if ($_SESSION['session_user_start'] == "1"){
     header('location:banking');   
+  }
 ?>
 
 <!DOCTYPE html>
@@ -50,12 +71,9 @@ if(isset($_SESSION['customer_login']))
 
 		<!-- Custom styles for this template-->
 		<link href="vendor/css/sb-admin.css" rel="stylesheet">
-		<title>Online Banking Login | UBank</title>
+		<title>Login to Dashboard | UBank Online Banking</title>
 		
 		<script type="text/javascript">
-			function Register() {
-				alert("Please contact your system administrator to register an account.");
-			}
 			function Forgot() {
 				alert("Please contact your system administrator to request a new password.");
 			}
@@ -72,30 +90,31 @@ if(isset($_SESSION['customer_login']))
 					echo "<div class='alert alert-danger'>
 								<i class='fas fa-exclamation-triangle'></i>
 								Wrong credentials. Please try again.</div>";
-				} else {
-					echo "<p>Please login below using your customer account.</p>";
+				} elseif (isset($_GET['disabled'])) {
+          echo "<div class='alert alert-danger'>
+                <i class='fas fa-exclamation-triangle'></i>
+                Your account is disabled. Please <a href='http://ubank.me/contact'>contact support</a> for more information.</div>";
+        } elseif (isset($_GET['password'])) {
+          echo "<div class='alert alert-success'>
+                <i class='fas fa-check'></i>
+                Password updated. Please login using your new password to continue.</div>";
+        } else {
+					echo "<p>Login below to your banking account.</p>";
 				}
 			?>
             <div class="form-group">
               <div class="form-label-group">
-                <input type="email" id="email" class="form-control" name="uname" placeholder="Email address" required="required">
-                <label for="email">Email Address</label>
+                <input type="text" id="username" class="form-control" name="loginuser" placeholder="Username" required="required">
+                <label for="username">Username or Email</label>
               </div>
             </div>
             <div class="form-group">
               <div class="form-label-group">
                   <div class="form-label-group">
-                    <input type="password" id="password" class="form-control" name="pwd" placeholder="Password">
+                    <input type="password" id="password" class="form-control" name="loginpassword" placeholder="Password">
                     <label for="password">Password</label>
 					<input type="hidden" name="p" id="p" value="">
                   </div>
-				<!-- Password Confirmation (skipping) -->
-                <!-- <div class="col-md-6">
-                  <div class="form-label-group">
-                    <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm password" required="required">
-                    <label for="confirmPassword">Confirm password</label>
-                  </div>
-                </div> -->
               </div>
             </div>
 			<div class="form-group">
@@ -105,10 +124,10 @@ if(isset($_SESSION['customer_login']))
                 </label>
               </div>
             </div>
-			<button class="btn btn-primary btn-block" type="submit" class="btn" name="submitBtn">Login</button>
+			<button class="btn btn-primary btn-block" type="submit" class="btn" name="submit_login">Login <i class="fas fa-sign-in-alt"></i></button>
           </form>
           <div class="text-center">
-            <a class="d-block small mt-3" href="javascript:Register();">Register an Account</a>
+            <a class="d-block small mt-3" href="http://ubank.me/newaccount" target="_blank">Register an Account</a>
             <a class="d-block small" href="javascript:Forgot();">Forgot Password?</a> 
           </div>
         </div>

@@ -2,7 +2,7 @@
 session_start();
 include '_inc/dbconn.php';
 		
-if(!isset($_SESSION['customer_login'])) 
+if(!isset($_SESSION['session_user_start'])) 
     header('location:index.php');   
 ?>
 <?php include 'displayinfo.php' ?>
@@ -30,7 +30,7 @@ if(!isset($_SESSION['customer_login']))
     <!-- Page level plugin CSS-->
     <link href="vendor/js/datatables/dataTables.bootstrap4.css" rel="stylesheet">
 	
-	<title>Account Settings | UBank</title>
+	<title><?php echo $userdat_name; ?>'s Account Settings | UBank Online Banking</title>
   </head>
   <body id="page-top">
     <?php include 'aheader.php' ?>
@@ -53,11 +53,6 @@ if(!isset($_SESSION['customer_login']))
 					<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
 					<i class='fas fa-exclamation-triangle'></i>
 					Wrong credentials. Please try again.</div>";
-			} elseif (isset($_GET['success'])) {
-				echo "<div class='alert alert-success alert-dismissible'>
-					<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-					<i class='fas fa-check'></i>
-					Password successfully updated.</div>";
 			} elseif (isset($_GET['send'])) {
 				echo "<div class='alert alert-success alert-dismissible'>
 					<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
@@ -76,60 +71,36 @@ if(!isset($_SESSION['customer_login']))
 				  <i class="far fa-life-ring"></i>
 				  Support Panel</div>
 				<div class="card-body">
-					<?php
-						$cust_id=$_SESSION['cust_id'];
-						include '_inc/dbconn.php';
-						$sql="SELECT * FROM customer WHERE email='$cust_id'";
-						$result=  mysql_query($sql) or die(mysql_error());
-						$rws=  mysql_fetch_array($result);
-						
-						$name= $rws[1];
-						$account_no= $rws[0];
-						$dob=$rws[3];
-						$nominee=$rws[4];
-						$branch=$rws[10];
-						$branch_code= $rws[11];
-						
-						$gender=$rws[2];
-						$mobile=$rws[7];
-						$email=$rws[8];
-						$address=$rws[6];
-						
-						$last_login= $rws[12];
-						
-						$acc_status=$rws[13];
-						$acc_type=$rws[5];				
-					?>
 					<p>If you got any questions please submit the form below and we will answer it as soon as possible.</p>
 					<form action="process_question.php" method="POST">
 						<table>
 							<tr>
 								<td>First name:</td>
-								<td><input type="hidden" name="q_name" value="<?php echo $name ?>" />
-								<input type="text" value="<?php echo $name ?>" disabled="disabled" /></td>
+								<td><input type="hidden" name="q_name" value="<?php echo $userdat_name ?>" />
+								<input class="form-control" type="text" value="<?php echo $userdat_name ?>" disabled="disabled" /></td>
 							</tr>
 							<tr>
-								<td>Email address:</td>
-								<td><input type="hidden" name="q_email" value="<?php echo $email ?>" />
-								<input type="email" value="<?php echo $email ?>" disabled="disabled" /></td>
+								<td>Email address: &nbsp;</td>
+								<td><input type="hidden" name="q_email" value="<?php echo $userdat_email ?>" />
+								<input class="form-control" type="email" value="<?php echo $userdat_email ?>" disabled="disabled" /></td>
 							</tr>
 							<tr>
 								<td>Category:</td>
 								<td>
-									<select name="q_type" required="required" data-error="Select your category.">
+									<select class="form-control" name="q_type" required="required">
 										<option value=""></option>
-										<option value="(C) Services">More information about us</option>
-										<option value="(C) Banking">UBank Online Banking</option>
-										<option value="(C) Bug">Exploit/Bug Found</option>
-										<option value="(C) Job">Job Application</option>
-										<option value="(C) Other">Other</option>
+										<option value="Services">More information about us</option>
+										<option value="Banking">UBank Online Banking</option>
+										<option value="Bug">Exploit/Bug Found</option>
+										<option value="Job">Job Application</option>
+										<option value="Other">Other</option>
 									</select>
 								</td>
 							</tr>	
 						</table><br>
-						<p>Your Message:<br>
-						<input type="text" name="q_message"  required="required"/></p>
-						<input type="submit" class="btn btn-success" name="submit_question" value="Submit Question"/>
+						<p>Your Message<br>
+						<textarea class="form-control" type="text" name="q_message" rows="3" required="required" placeholder="Write your message here..."></textarea></p>
+						<input type="submit" class="btn btn-success" name="submit_question" value="Submit my Message"/>
 					</form>
 				</div>
 				<div class="card-footer small text-muted">Updated <b>Today</b> at <?php echo date("H:i A (P)"); ?></i></div>
@@ -148,18 +119,18 @@ if(!isset($_SESSION['customer_login']))
 						<table>
 							<tr>
 								<td>Enter old password:</td>
-								<td><input type="password" name="old_password" required=""/></td>
+								<td><input class="form-control" type="password" name="old_password" required=""/></td>
 							</tr>
 							<tr>
 								<td>Enter new password:</td>
-								<td><input type="password" name="new_password" required=""/></td>
+								<td><input class="form-control" type="password" name="new_password" required=""/></td>
 							</tr>
 							<tr>
-								<td>Enter password again:</td>
-								<td><input type="password" name="again_password" required=""/></td>
+								<td>Enter password again: &nbsp;</td>
+								<td><input class="form-control" type="password" name="again_password" required=""/></td>
 							</tr>
 						</table><br>
-						<input type="submit" class="btn btn-success" name="change_password" value="Change Password"/>
+						<input type="submit" class="btn btn-success" name="change_password" value="Change my Password"/>
 					</form>
 				</div>
 				<div class="card-footer small text-muted">Updated <b>Today</b> at <?php echo date("H:i A (P)"); ?></i></div>

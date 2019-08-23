@@ -1,8 +1,8 @@
 <?php 
-session_start();
-include '_inc/dbconn.php';
+	session_start();
+	include '_inc/dbconn.php';
 		
-if(!isset($_SESSION['customer_login'])) 
+	if (!isset($_SESSION['session_user_start']))
     header('location:index.php');   
 ?>
 <?php include 'displayinfo.php' ?>
@@ -30,13 +30,12 @@ if(!isset($_SESSION['customer_login']))
     <!-- Page level plugin CSS-->
     <link href="vendor/js/datatables/dataTables.bootstrap4.css" rel="stylesheet">
 	
-	<title>My Account | UBank</title>
+	<title><?php echo $userdat_name; ?>'s Account Overview | UBank Online Banking</title>
   </head>
   <body id="page-top">
     <?php include 'aheader.php' ?>
 
       <div id="content-wrapper">
-
         <div class="container-fluid">
 
           <!-- Breadcrumbs 
@@ -72,39 +71,15 @@ if(!isset($_SESSION['customer_login']))
 				  <i class="fas fa-fw fa-user-circle"></i>
 				  Personal/Card Details</div>
 				<div class="card-body">
-					<?php
-						$cust_id=$_SESSION['cust_id'];
-						include '_inc/dbconn.php';
-						$sql="SELECT * FROM customer WHERE email='$cust_id'";
-						$result=  mysql_query($sql) or die(mysql_error());
-						$rws=  mysql_fetch_array($result);
-						
-						$name= $rws[1];
-						$account_no= $rws[0];
-						$dob=$rws[3];
-						$nominee=$rws[4];
-						$branch=$rws[10];
-						$branch_code= $rws[11];
-						
-						$gender=$rws[2];
-						$mobile=$rws[7];
-						$email=$rws[8];
-						$address=$rws[6];
-						
-						$last_login= $rws[12];
-						
-						$acc_status=$rws[13];
-						$acc_type=$rws[5];				
-					?>
 					<p>
-						<span class="heading">Name: <b></span><?php echo $name;?></b><br>
-						<span class="heading">Email addres: <b></span><?php echo $email;?></b><br>
-						<span class="heading">Home Address: <b></span><?php echo $address;?></b><br>
-						<span class="heading">Mobile: <b></span><?php echo $mobile;?></b><br>
-						<span class="heading">gender: <b></span><?php if($gender=='M') echo "Male"; else echo "Female";?></b><br>
+						<span class="heading">Name: <b></span><?php echo $userdat_name;?></b><br>
+						<span class="heading">Email addres: <b></span><?php echo $userdat_email;?></b><br>
+						<span class="heading">Home Address: <b></span><?php echo $userdat_address;?></b><br>
+						<span class="heading">Mobile: <b></span><?php echo $userdat_mobile;?></b><br>
+						<span class="heading">gender: <b></span><?php if($userdat_gender=='M') echo "Male"; else echo "Female";?></b><br>
 						<br>
-						<span class="heading">Account Type: <b></span><?php if($acc_type=='current') echo "Current"; else echo "Savings"; ?></b> (<i>cannot be changed</i>)<br>
-						<span class="heading">Account No: <b></span><?php echo $account_no;?></b> (<i>cannot be changed</i>)
+						<span class="heading">Account Type: <b></span><?php if($userdat_acctype=='current') echo "Current"; else echo "Savings"; ?></b> (<i>cannot be changed</i>)<br>
+						<span class="heading">Account No: <b></span><?php echo $userdat_id;?></b> (<i>cannot be changed</i>)
 					</p>
 					<p><i>Please contact us via the <a href="settings">support panel</a> if you want to change/update the information displayed.</i></p>
 				</div>
@@ -123,41 +98,49 @@ if(!isset($_SESSION['customer_login']))
 					<p> If you need a new card, please issue one below and we will send you a new one as soon as possible. The following cards can be issued:
 					<i class="fab fa-cc-mastercard"></i> <b>Mastercard</b>, <i class="fas fa-credit-card"></i><b> Creditcard </b>or <i class="fab fa-cc-visa"></i><b> Visa Card</b>.</p>
 					<div class="table-responsive">
-							<?php 
+							<?php
 								include '_inc/dbconn.php';
-								$sender_id=$_SESSION["login_id"];
-								$sql="SELECT * FROM req_creditcard WHERE account_no='$sender_id'";
-								$result=mysql_query($sql) or die(mysql_error());
-								$rws=mysql_fetch_array($result);
-								$creditcard_status=$rws[3];
-								$creditcard_id=$rws[2];
+								$requester_id=$_SESSION["session_user_id"];
+
+								// request information for creditcards
+								$sql = "SELECT * FROM UBankDAT.req_creditcard WHERE account_no='$requester_id'";
+								$result = mysql_query($sql) or die(mysql_error());
+								$rws = mysql_fetch_array($result);
+								$creditcard_status = $rws[3];
+								$creditcard_id = $rws[2];
+								$creditcard_date = $rws[4];
+
+								// request information for visacards
+								$sql = "SELECT * FROM UBankDAT.req_visacard WHERE account_no='$requester_id'";
+								$result = mysql_query($sql) or die(mysql_error());
+								$rws = mysql_fetch_array($result);
+								$visacard_status = $rws[3];
+								$visacard_id = $rws[2];
+								$visacard_date = $rws[4];
+
+								// request information for mastercards
+								$sql = "SELECT * FROM UBankDAT.req_mastercard WHERE account_no='$requester_id'";
+								$result = mysql_query($sql) or die(mysql_error());
+								$rws = mysql_fetch_array($result);
+								$mastercard_status = $rws[3];
+								$mastercard_id = $rws[2];
+								$mastercard_date = $rws[4];
 								
-								$sql="SELECT * FROM req_visacard WHERE account_no='$sender_id'";
-								$result=mysql_query($sql) or die(mysql_error());
-								$rws=mysql_fetch_array($result);
-								$visacard_status=$rws[3];
-								$visacard_id=$rws[2];
-								
-								$sql="SELECT * FROM req_mastercard WHERE account_no='$sender_id'";
-								$result=mysql_query($sql) or die(mysql_error());
-								$rws=mysql_fetch_array($result);
-								$mastercard_status=$rws[3];
-								$mastercard_id=$rws[2];
-								
-								if(($creditcard_id==$sender_id) || ($visacard_id==$sender_id) || ($mastercard_id==$sender_id)) {
+								if (($creditcard_id == $requester_id) || ($visacard_id == $requester_id) || ($mastercard_id == $requester_id)) {
 									echo "<table class='table table-bordered'>";
 									echo "<thead>";
 									echo "<tr>";
-									echo "<th>Requested Card</th>";
+									echo "<th>Available Cards</th>";
 									echo "<th>Status</th>";
+									echo "<th>Date issued</th>";
 									echo "</tr>";
 									echo "</thead>";
 									
 									echo "<tbody>";
 									echo "<tr>";
-									echo "<td><i class='fab fa-cc-mastercard'></i> Mastercard </td><td>$mastercard_status</td></tr>";
-									echo "<td><i class='fas fa-credit-card'></i> Creditcard </td><td>$creditcard_status</td></tr>";
-									echo "<td><i class='fab fa-cc-visa'></i> Visa Card </td><td>$visacard_status</td></tr>";
+									echo "<td><i class='fab fa-cc-mastercard'></i> Mastercard </td><td>$mastercard_status</td><td>$mastercard_date</td></tr>";
+									echo "<td><i class='fas fa-credit-card'></i> Creditcard </td><td>$creditcard_status</td><td>$creditcard_date</td></tr>";
+									echo "<td><i class='fab fa-cc-visa'></i> Visa Card </td><td>$visacard_status</td><td>$visacard_date</td></tr>";
 									echo "</tr>";
 									echo "</tbody>";
 									echo "</table>";
@@ -165,22 +148,22 @@ if(!isset($_SESSION['customer_login']))
 							?>
 					</div>
 					<?php if (($creditcard_status == 'ISSUED') && ($visacard_status == 'ISSUED') && ($mastercard_status == 'ISSUED')) {
-						echo "<p><i>All requested cards are issued. If you got any problems, please contact your system administrator.</i></p>";
+						echo "<p><i>All requested cards are issued. If you got any problems or you want to issue another one, please contact your system administrator.</i></p>";
 					} else {
-						echo "<p><i>Please keep in mind that the deliver time per item can be around 14 days.</i></p>";
-					} ?>
+						echo "<p><i>Please keep in mind that the deliver time per requested item can be around 14 days. You can issue your cards again when one's status is 'denied'.</i></p>";
+					?>
 					<form action="process_issue.php" method="POST">
 						<table>
-							<tr><td>Issue your new: 
-							<select name="selection">
+							<tr><td>Issue your new: &nbsp;</td><td>
+							<select class="form-control" name="card_selection">
 								<option value='Mastercard' selected>Mastercard</option>
 								<option value='Creditcard'>Creditcard</option>
 								<option value='Visacard'>Visa Card</option>
 							</select></td></tr>
-						</table><br>
-						<input type="submit" class="btn btn-success" name="submitBtn" value="Request">
+							<tr><td><input type="submit" class="btn btn-success" name="submitRequest" value="Request"></td><td /></tr>
 						</table>
 					</form>
+					<?php } ?>
 				</div>
 				<div class="card-footer small text-muted">Updated <b>Today</b> at <?php echo date("H:i A (P)"); ?></i></div>
 			  </div>

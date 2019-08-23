@@ -1,28 +1,54 @@
 <?php
-include '../_inc/dbconn.php';
-if(isset($_REQUEST['submitBtn'])){
-    $username=$_REQUEST['uname'];
-    $password=$_REQUEST['pwd'];
-  
-    $sql="SELECT email,pwd FROM staff WHERE email='$username' AND pwd='$password'";
-    $result=mysql_query($sql) or die(mysql_error());
-    $rws=  mysql_fetch_array($result);
+  if (isset($_REQUEST['login_submit'])){
+    include '../_inc/dbconn.php';
+    $login_user = $_REQUEST['loginuser'];
 
-    if($rws[0]==$username && $rws[1]==$password){
+    // password salting (for security reasons)
+    $salt = "@g26jQsG&nh*&#8v";
+    $login_password = sha1($_REQUEST['loginpassword'].$salt);
+
+
+    if (preg_match("/@/", $login_user)) { // check for @, if present:
+        // getting usefull information for session creation (with email)
+        $sql = "SELECT username,password,account,email,id,name FROM UBankMAIN.staff WHERE email='$login_user' AND password='$login_password'";
+        $result = mysql_query($sql) or die(mysql_error());
+        $res =  mysql_fetch_array($result);
+
+    } else { // no @ present, so login with username:
+        // getting usefull information for session creation (with username)
+        $sql = "SELECT username,password,account,email,id,name FROM UBankMAIN.staff WHERE username='$login_user' AND password='$login_password'";
+        $result = mysql_query($sql) or die(mysql_error());
+        $res =  mysql_fetch_array($result);
+    }
+
+    $staff_username = $res[0];
+    $staff_pass = $res[1];
+    $staff_account = $res[2];
+    $staff_email = $res[3];
+    $staff_id = $res[4];
+    $staff_name = $res[5];
+
+    if (($login_user == $staff_username || $login_user == $staff_email) && $login_password == $staff_pass){
+        // set important session details (for both admin and staff members)
         session_start();
-        $_SESSION['staff_login']=1;
-        $_SESSION['staff_id']=$username;
-		header('location:home'); 
-    } else {
-        header('location:?error=1');
-    }  
-}
+        $_SESSION['session_staff_start'] = 1;
+        $_SESSION['session_staff_username'] = $staff_username;
+        $_SESSION['session_staff_email'] = $staff_email;
+        $_SESSION['session_staff_id'] = $staff_id;
+        $_SESSION['session_staff_name'] = $staff_name;
+      
+        $_SESSION['session_staff_account'] = $staff_account; // this can be admin/staff
+        header('location:dashboard');
+    } else { // error
+        header('location:?error=1'); 
+    }
+  }
 ?>
 <?php 
 session_start();
         
-if(isset($_SESSION['staff_login'])) 
-    header('location:home');   
+if(isset($_SESSION['session_staff_start'])) 
+    header('location:dashboard');   
 ?>
 
 <!DOCTYPE html>
@@ -43,7 +69,7 @@ if(isset($_SESSION['staff_login']))
 
 		<!-- Custom styles for this template-->
 		<link href="../vendor/css/sb-admin.css" rel="stylesheet">
-		<title>Staff Login | UBank</title>
+		<title>Login to the Staff Panel | UBank Online Banking</title>
 		
 		<script type="text/javascript">
 			function Forgot() {
@@ -54,7 +80,7 @@ if(isset($_SESSION['staff_login']))
     <body class="login-bg">
     <div class="container">
       <div class="card card-login mx-auto mt-5">
-        <div class="card-header text-center"><a href="http://ubank.me">&laquo;</a> UBank Staff Login</div>
+        <div class="card-header text-center"><a href="http://ubank.me">&laquo;</a> UBank Staff Panel</div>
         <div class="card-body text-center">
           <form action="" method="post" name="login_form">
 		    <?php
@@ -63,19 +89,19 @@ if(isset($_SESSION['staff_login']))
 								<i class='fas fa-exclamation-triangle'></i>
 								Wrong credentials. Please try again.</div>";
 				} else {
-					echo "<p>Please login below using your staff account.</p>";
+					echo "<p>Login below to your staff dashboard.</p>";
 				}
 			?>
             <div class="form-group">
               <div class="form-label-group">
-                <input type="text" id="email" class="form-control" name="uname" placeholder="Email address" required="required">
-                <label for="email">Email Address</label>
+                <input type="text" id="usern" class="form-control" name="loginuser" placeholder="Username or Email" required="required">
+                <label for="usern">Username or Email</label>
               </div>
             </div>
             <div class="form-group">
               <div class="form-label-group">
                   <div class="form-label-group">
-                    <input type="password" id="password" class="form-control" name="pwd" placeholder="Password">
+                    <input type="password" id="password" class="form-control" name="loginpassword" placeholder="Password">
                     <label for="password">Password</label>
 					<input type="hidden" name="p" id="p" value="">
                   </div>
@@ -95,7 +121,7 @@ if(isset($_SESSION['staff_login']))
                 </label>
               </div>
             </div>
-			<button class="btn btn-primary btn-block" type="submit" class="btn" name="submitBtn">Login</button>
+			<button class="btn btn-primary btn-block" type="submit" class="btn" name="login_submit">Login</button>
           </form>
           <div class="text-center">
             <a class="d-block small mt-3" href="javascript:Forgot();">Forgot Password?</a>

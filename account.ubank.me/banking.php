@@ -1,33 +1,31 @@
 <?php 
-session_start();
-        
-if(!isset($_SESSION['customer_login'])) 
-    header('location:index');   
+	session_start();
+	if (!isset($_SESSION['session_user_start'])){
+		header('location:index');
+	}
 ?>
 <?php
-                $cust_id=$_SESSION['cust_id'];
-                include '_inc/dbconn.php';
-                $sql="SELECT * FROM customer WHERE email='$cust_id'";
-                $result=  mysql_query($sql) or die(mysql_error());
-                $rws=  mysql_fetch_array($result);
-                
-                
-                $name= $rws[1];
-                $account_no= $rws[0];
-                $branch=$rws[10];
-                $branch_code= $rws[11];
-                $last_login= $rws[12];
-                $acc_status=$rws[13];
-                $address=$rws[6];
-                $acc_type=$rws[5];
-                
-                $gender=$rws[2];
-                $mobile=$rws[7];
-                $email=$rws[8];
-                
-                $_SESSION['login_id']=$account_no;
-                $_SESSION['name']=$name;
+	// gather all information from session data
+	$userdat_email = $_SESSION['session_user_email'];
+
+	include '_inc/dbconn.php';
+	$sql = "SELECT * FROM UBankMAIN.users WHERE email='$userdat_email'";
+	$result = mysql_query($sql) or die(mysql_error());
+	$res = mysql_fetch_array($result);
+	
+	// setting all variables
+	$userdat_id = $res[0];
+	$userdat_name = $res[1];
+	$userdat_gender = $res[2];
+	$userdat_acctype = $res[4];
+	$userdat_address = $res[5];
+	$userdat_mobile = $res[6];
+	$userdat_branch = $res[10];
+	$userdat_branchcode = $res[11];
+	$userdat_lastlogin = $res[12];
+	$userdat_accstatus = $res[13];
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -51,7 +49,7 @@ if(!isset($_SESSION['customer_login']))
     <!-- Page level plugin CSS-->
     <link href="vendor/js/datatables/dataTables.bootstrap4.css" rel="stylesheet">
 	
-	<title>Dashboard | UBank</title>
+	<title><?php echo $userdat_name; ?>'s Dashboard | UBank Online Banking</title>
   </head>
   <body id="page-top">
     <?php include 'aheader.php' ?>
@@ -70,31 +68,21 @@ if(!isset($_SESSION['customer_login']))
 		  
 		  <!-- Cookies -->
 		  <?php
-				$sql="SELECT * FROM passbook$account_no";
-                $result=  mysql_query($sql) or die(mysql_error());
-                $rws=  mysql_fetch_array($result);
+				$sql2="SELECT * FROM UBankDAT.passbook$userdat_id";
+                $result2=  mysql_query($sql2) or die(mysql_error());
+                $res2=  mysql_fetch_array($result2);
 				
-				if (isset($_GET['add'])) {
-					echo "<div class='alert alert-success alert-dismissible'>
-						<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-						<i class='fas fa-check'></i>
-						New Customer added. </div>";
-				} elseif (isset($_GET['deleted'])) {
-					echo "<div class='alert alert-success alert-dismissible'>
-						<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-						<i class='fas fa-check'></i>
-						Customer deleted.</div>";
-				} elseif (isset($_GET['edit'])) {
-					echo "<div class='alert alert-success alert-dismissible'>
-						<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-						<i class='fas fa-check'></i>
-						Customer information changed.</div>";
-				// show alert that your balance is lower than 5$ and it's recommended to make a deposit
-				} elseif ($rws[7]<=5) {
+				if ($res2[7]<=5) {
 					echo "<div class='alert alert-warning alert-dismissible'>
 						<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-						<i class='fas fa-hand-holding-usd'></i> Warning:
-						Your balance is currently $5 or less ($<b>".$rws[7]."</b> precisely). It's recommended to make a deposit before you start online banking.</div>";
+						<i class='fas fa-hand-holding-usd'></i> <b>Warning</b>:
+						Your balance is currently $<b>".$res2[7]."</b>. We recommended you to make a deposit before you start online banking.</div>";
+				// show cookie alert on default (and when balance not too low)
+				} elseif ($res2[7]>=1000000000) {
+					echo "<div class='alert alert-warning'>
+						<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+						<i class='fas fa-exclamation-triangle'></i> <b>Warning</b>:
+						You are almost too <i class='fas fa-money-bill-wave'></i><b> rich </b><i class='fas fa-money-bill-wave'></i> for us to keep your money. Please store a lower amount of money instead of $<b>".$res2[7]."</b>.</div>";
 				// show cookie alert on default (and when balance not too low)
 				} else {
 					echo "<div class='alert alert-info alert-icon-block alert-dismissible' role='alert'>
@@ -115,9 +103,9 @@ if(!isset($_SESSION['customer_login']))
 				  General Information</div>
 				<div class="card-body">
 					<p>
-						<span class="heading">Welcome <b></span><?php echo $name;?></b> <small>(user)</small>,<br>
-						<span class="heading">Your Last login was on <b></span><?php echo $last_login;?></b>,<br>
-						<span class="heading">Your Account status is <b></span><?php echo $acc_status;?></b> and it's your <b><?php echo $acc_type;?></b> account.
+						<span class="heading">Welcome <b></span><?php echo $userdat_name;?></b> (user),<br>
+						<span class="heading">Your Last login was on <b></span><?php echo $userdat_lastlogin;?></b>,<br>
+						<span class="heading">Your Account status is <b></span><?php echo $userdat_accstatus;?></b> and it's your <b><?php echo $userdat_acctype;?></b> account.
 					</p>
 					<?php 
 					if ($acc_type) {
@@ -141,28 +129,29 @@ if(!isset($_SESSION['customer_login']))
 				  <p> To transfer funds to someone you will need to setup your addresbook first. All active accounts in your addresbook will show up below.</p>
 					<?php
 						include '_inc/dbconn.php';
-						$sender_id=$_SESSION["login_id"];
-						$sql="SELECT * FROM contacts WHERE sender_id='$sender_id' AND status='ACTIVE'";
-						$result=  mysql_query($sql);
-						$rws=mysql_fetch_array($result);
-						$s_id=$rws[1];              
+						$contact_senderid = $_SESSION["session_user_id"];
+						$sql3 = "SELECT * FROM UBankMAIN.contacts WHERE sender_id='$contact_senderid' AND status='ACTIVE'";
+						$result3 = mysql_query($sql3);
+						$res3 = mysql_fetch_array($result3);
+						$contact_id = $res3[1];              
 					?>
 					<?php       
-					if($sender_id==$s_id){
+					if($contact_senderid == $contact_id){
 						echo "<form action='process_transfer' method='POST'>";
 						echo "<table>";
-						echo "<tr><td>Select your reciepient:</td><td> <select name='transfer'>" ; 
-					
-						$sql1="SELECT * FROM contacts WHERE sender_id='$sender_id' AND status='ACTIVE'";
-						$result=  mysql_query($sql);
+						echo "<tr><td>Select your reciepient: &nbsp;</td><td> <select class='form-control' name='receiver'>";
+
+						$sql4="SELECT * FROM UBankMAIN.contacts WHERE sender_id='$contact_senderid' AND status='ACTIVE'";
+						$result4 = mysql_query($sql4);
 							
-						while($rws=mysql_fetch_array($result)) {
-							echo "<option value='$rws[3]'>$rws[4]</option>";
+						while ($res4 = mysql_fetch_array($result4)) {
+							echo "<option value='$res4[3]'>$res4[4]</option>";
 						}
 						
 						echo "</td></tr></select>";
-						echo "<tr><td>Enter Amount: </td><td><input type='number' name='t_val' placeholder='Amount in dollar ($)' required></td></table>";
-						echo "<table><tr><td style='padding:5px;'><input type='submit' class='btn btn-success' name='submitBtn' value='Transfer' class='addstaff_button'></td></tr></table></form>"; 
+						echo "<tr><td>Enter Amount: </td><td><input class='form-control' type='number' name='transfer_amount' placeholder='Amount (in $)' required></td></table>";
+						echo "<table><tr><td style='padding:5px;'><button class='btn btn-success' type='submit' class='btn' name='submitBtn'>Transfer Funds <i class='fas fa-hand-holding-usd'></i></button>
+						</td></tr></table></form>"; 
 					} else {
 						echo "<i><p>You have no active contacts on this account. Please goto your <a href='contacts'>contacts</a> to make a transaction.</p></i>";
 					}
@@ -172,7 +161,7 @@ if(!isset($_SESSION['customer_login']))
 			  </div>
 			</div>
 			<div class="col-xl-3 mb-6">
-			  <div class="card o-hidden mb-3" id="transfer">
+			  <div class="card o-hidden mb-3" id="details">
 				<div class="card-header">
 				  <i class="fas fa-money-bill-alt"></i>
 				  Card Details</div>
@@ -181,19 +170,16 @@ if(!isset($_SESSION['customer_login']))
                 </div>
 				<div class="card-body">
 				  <?php
-						$sql="SELECT * FROM passbook".$_SESSION['login_id'] ;
-						$result=  mysql_query($sql) or die(mysql_error());
-						while($rws=  mysql_fetch_array($result))
-						{
-						$balance=$rws[7];
+						$sql4 = "SELECT * FROM UBankDAT.passbook".$_SESSION['session_user_id'] ;
+						$result4 = mysql_query($sql4) or die(mysql_error());
+						while ($res4 = mysql_fetch_array($result4)) {
+							$user_balance = $res4[7];
 						}            
 					?>
-				  <p><span class="heading">Your Balance: $</span><?php echo $balance;?></p>
-				  <p>
-					<span class="heading">Ifsc Code: </span><?php echo $branch_code;?><br>
-					<span class="heading">Country: </span><?php echo $branch;?><br>
-					<span class="heading">Account No: </span><?php echo $account_no;?>
-				  </p>
+					<span class="heading">Current Balance: $</span><b><?php echo $user_balance;?></b><br><br>
+					<span class="heading">Ifsc Code: </span><b><?php echo $userdat_branchcode;?></b><br>
+					<span class="heading">Country: </span><b><?php echo $userdat_branch;?></b><br>
+					<span class="heading">Your Account No: </span><b><?php echo $userdat_id;?></b>
 				</div>
 				<div class="card-footer small text-muted">Updated <b>Today</b> at <?php echo date("H:i A (P)"); ?></i></div>
 			  </div>
@@ -217,9 +203,8 @@ if(!isset($_SESSION['customer_login']))
               Recent Activity/Transactions</div>
             <div class="card-body">
 			<?php include '_inc/dbconn.php';
-				$sender_id=$_SESSION["login_id"];
-				$sql="SELECT * FROM passbook".$sender_id;
-				$result=  mysql_query($sql) or die(mysql_error()); 
+				$sql = "SELECT * FROM UBankDAT.passbook".$_SESSION['session_user_id'];
+				$result = mysql_query($sql) or die(mysql_error()); 
 			?>		
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -227,8 +212,8 @@ if(!isset($_SESSION['customer_login']))
                     <tr>
                       <th>Id</th>
                       <th>Description</th>
-                      <th>Credit &uarr; (amount)</th>
-                      <th>Debit &darr; (amount)</th>
+                      <th>Credit (deposited)</th>
+                      <th>Debit (withdrawn/transfered)</th>
                       <th>Balance (amount)</th>
 					  <th>Transaction Date</th>
                     </tr>
