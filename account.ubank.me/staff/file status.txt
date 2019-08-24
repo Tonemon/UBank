@@ -7,7 +7,8 @@ Status of how much of the dashboard is done
 - logout.php V
 - aheader.php V
 - displayinfo.php V
-- admin.php (start above redirect forms to itself and add admin-add.php and admin-pwd.php to header)
+- admin.php V
+- admin-edit.php V
 
 !!! Make one 'admin' page where owner, admins and staff have access to:
 - Owner can: add/edit admins, staff and users,

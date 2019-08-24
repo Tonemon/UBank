@@ -95,12 +95,12 @@
 						<tbody>
 						<tr>
 							<td width="150px"><span class="heading"><b>Staff Overview (Add/Edit/Delete)</b>.</span></td>
-							<td><a href="edit/admin?overview" class="btn btn-success"><i class="fas fa-link"></i> Staff &raquo;</a></td>
+							<td><a href="admin?overview" class="btn btn-success"><i class="fas fa-link"></i> Staff &raquo;</a></td>
 						</tr>
 						<tr><td><br></td></tr>
 						<tr>
 							<td width="150px"><span class="heading"><b>User Overview (Add/Edit/Delete)</b>.</span><br></td>
-							<td><a href="edit/users?overview" class="btn btn-success"><i class="fas fa-link"></i> Users &raquo;</a></td>
+							<td><a href="users?overview" class="btn btn-success"><i class="fas fa-link"></i> Users &raquo;</a></td>
 						</tr>
 						</tbody>
 					</table>

@@ -18,6 +18,12 @@
     <li class="nav-item dropdown no-arrow mx-1">
       <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <i class="fas fa-bell fa-fw"></i>
+        <?php include '../_inc/dbconn.php';
+          $countsql = "SELECT COUNT(`id`) FROM UBankMAIN.security";
+          $countresult = mysql_query($countsql) or die(mysql_error());
+          $countres = mysql_fetch_array($countresult);
+        ?>
+        <span class="badge badge-danger"><?php echo $countres[0]; ?></span>
       </a>
       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown">
         <a class="dropdown-item" style="pointer-events: none; cursor: default;"><i class="fas fa-server"></i> Maintenance Messages</a>
@@ -69,22 +75,15 @@
         <span>Dashboard</span>
       </a>
     </li>
-    <?php if ($staffdat_id == "1"){ ?>
+    <?php if ($staffdat_account == "admin"){ ?>
     <li class="nav-item">
-      <a class="nav-link" href="edit/admin?overview">
-        <i class="fas fa-fw fa-crown"></i>
-        <span>Admin</span>
-      </a>
-    </li>
-    <?php } if ($staffdat_account == "admin"){ ?>
-    <li class="nav-item">
-      <a class="nav-link" href="edit/staff?overview">
+      <a class="nav-link" href="admin?overview">
         <i class="fas fa-fw fa-user-edit"></i>
         <span>Edit Staff</span>
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="edit/users?overview">
+      <a class="nav-link" href="users?overview">
         <i class="fas fa-fw fa-user-edit"></i>
         <span>Edit Users</span>
       </a>

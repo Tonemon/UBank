@@ -7,7 +7,7 @@ if(!isset($_SESSION['session_staff_start']))
 ?>
 <?php include 'displayinfo.php' ?>
 
-<?php /* NEED TO FIX THIS AND ADD MULTIPLE WHERE STATEMENTS!!! Check unotes for more info!!
+<?php /* NEED TO FIX THIS AND ADD MULTIPLE WHERE STATEMENTS (statements for actions, like delete user, add user... etc. )!!! Check unotes for more info!!
 	$delete_id = mysql_real_escape_string($_REQUEST['editadmin_id']);
 	if(isset($_REQUEST['delete_admin'])){
 		$sql_delete="DELETE FROM UBankMAIN.staff WHERE `id` = '$delete_id'";
@@ -46,6 +46,45 @@ if(!isset($_SESSION['session_staff_start']))
 
       <div id="content-wrapper">
         <div class="container-fluid">
+        	<?php
+				if ($_GET['success'] == "1") {
+					echo "<div class='alert alert-success alert-dismissible'>
+						<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+						<i class='fas fa-check'></i> New staff member added. </div>";
+				} elseif ($_GET['success'] == "2") {
+					echo "<div class='alert alert-success alert-dismissible'>
+						<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+						<i class='fas fa-check'></i> Staff information changed.</div>";
+				} elseif ($_GET['success'] == "3") {
+					echo "<div class='alert alert-success alert-dismissible'>
+						<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+						<i class='fas fa-check'></i> Staff member deleted.</div>";
+				} elseif ($_GET['success'] == "4") {
+					echo "<div class='alert alert-success alert-dismissible'>
+						<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+						<i class='fas fa-check'></i> Staff record deleted.</div>";
+				} elseif ($_GET['error'] == "1") {
+					echo "<div class='alert alert-warning alert-dismissible'>
+						<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+						<i class='fas fa-exclamation-triangle'></i> Oh. Something went wrong. Please try again.</div>";
+				} elseif ($_GET['error'] == "2") {
+					echo "<div class='alert alert-warning alert-dismissible'>
+						<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+						<i class='fas fa-exclamation-triangle'></i> This Email address or username already exists! Please choose another one and try again.</div>";
+				} elseif ($_GET['error'] == "3") {
+					echo '<div class="col-xl-12 mb-6"><div class="alert alert-warning alert-dismissible">
+						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+						<i class="fas fa-exclamation-triangle"></i> The submitted passwords do not match. No information was changed.</div>';
+				} elseif ($_GET['error'] == "4") {
+					echo '<div class="col-xl-12 mb-6"><div class="alert alert-danger alert-dismissible">
+						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+						<i class="fas fa-exclamation-triangle"></i> You <b>cannot</b> remove the <b>owner account</b> (id 1). This would make a lot of functions unusable.</div>';
+				} elseif ($_GET['error'] == "5") {
+					echo '<div class="col-xl-12 mb-6"><div class="alert alert-warning alert-dismissible">
+						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+						<i class="fas fa-exclamation-triangle"></i> Please select a staff record first from the "deleted staff" section to delete.</div>';
+				} 
+			?>
 		<?php if ($staffdat_account == "admin"){ ?>
 		
           <!-- Breadcrumbs 
@@ -104,7 +143,7 @@ if(!isset($_SESSION['session_staff_start']))
 				  <i class="fas fa-user-plus"></i>
 				  Add new Staff member</div>
 				<div class="card-body">
-					<form action="admin-add.php" method="POST">
+					<form action="admin-edit" method="POST">
 						<table>
 							<tr>
 								<td width="100px">Full Name</td>
@@ -152,7 +191,7 @@ if(!isset($_SESSION['session_staff_start']))
 								<td><input class="form-control" type="password" name="admin_password" required /></td>
 							</tr>
 						</table><br>
-						<input type="submit" class="btn btn-success" name="add_admin" value="Add new Admin" class='addadmin_button'/>
+						<input type="submit" class="btn btn-success" name="add_staff" value="Add new Admin" class='addstaff_button'/>
 					</form>
 				</div>
 				<div class="card-footer small text-muted">Updated <b>Today</b> at <?php echo date("H:i A (P)"); ?></div>
@@ -162,19 +201,19 @@ if(!isset($_SESSION['session_staff_start']))
 			  <div class="card o-hidden mb-3">
 				<div class="card-header">
 				  <i class="fas fa-user-minus"></i>
-				  Deleted Users</div>
+				  Deleted Staff</div>
 				<div class="card-body">
 				  <form action="admin-edit" method="POST">
 					<div class="table-responsive">
-					<small class="form-text">The users on this this page are either removed or they closed their account. The reason can be found on the right.<br>NOTICE: These accounts <b>cannot</b> be recovered! This page allows you <b>only</b> to <b>keep track of removed accounts</b> and can be used when someone contacts us about their deleted account.</small><br>
+					<small class="form-text">The staff members on this this page are either removed or they closed their account. The reason can be found on the right.<br>NOTICE: These accounts <b>cannot</b> be recovered! This page allows you <b>only</b> to <b>keep track of removed accounts</b> and can be used when someone contacts us about their deleted account.</small><br>
 					<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 						<?php
 							include '../_inc/dbconn.php';
-							$query2="SELECT * FROM UBankMAIN.usersclosed";
+							$query2="SELECT * FROM UBankMAIN.staffclosed";
 							$res2=  mysql_query($query2) or die(mysql_error());
 							
-							$sql_min="SELECT MIN(id) from UNotesMAIN.usersclosed";
-							$result_min=  mysql_query($sql_min);
+							$sql_min="SELECT MIN(id) from UBankMAIN.staffclosed";
+							$result_min = mysql_query($sql_min);
 							$rws2 = mysql_fetch_array($result_min);
 						?>
 						<thead>
@@ -198,12 +237,12 @@ if(!isset($_SESSION['session_staff_start']))
 									echo "<td>".$rws[4]."</td>";
 									echo "<td>".$rws[5]."</td>";
 									echo "<td>".$rws[6]."</td>";
-									if ($rws[7] == "## inactive ##"){
-										echo "<td><i>This user has been inactive for too long (+2 years).</i></td>";
-									} elseif ($rws[7] == "## unusual ##"){
-										echo "<td><i>This account showed unusual/fraudulent activity.</i></td>";
-									} elseif ($rws[7] == "## exploiting ##"){
-										echo "<td><i>This account was used for exploiting purposes.</i></td>";
+									if ($rws[7] == "## stopped ##"){
+										echo "<td><i>This staff member stopped working at UBank.</i></td>";
+									} elseif ($rws[7] == "## reason2 ##"){
+										echo "<td><i>...</i></td>";
+									} elseif ($rws[7] == "## reason3 ##"){
+										echo "<td><i>...</i></td>";
 									} elseif ($rws[7] == "## other ##"){
 										echo "<td><i>This account is deleted because of other (unlisted) reasons.</i></td>";
 									} else {
@@ -236,12 +275,12 @@ if(!isset($_SESSION['session_staff_start']))
 					<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 						<?php
 							include '../_inc/dbconn.php';
-							$query2="SELECT * FROM UBankMAIN.staff";
-							$res2=  mysql_query($query2) or die(mysql_error());
+							$query2 = "SELECT * FROM UBankMAIN.staff";
+							$res2 = mysql_query($query2) or die(mysql_error());
 							
-							$sql_min = "SELECT MIN(id) from UNotesMAIN.staff";
+							$sql_min = "SELECT MIN(id) from UBankMAIN.staff";
 							$result_min = mysql_query($sql_min);
-							$rws2 = mysql_fetch_array($result_min); // same fix. check /banking transfer funds to user and use the same system fix
+							$rws2 = mysql_fetch_array($result_min);
 						?>
 						<thead>
 						<tr>
@@ -250,32 +289,34 @@ if(!isset($_SESSION['session_staff_start']))
 							<th>name</th>
 							<th>username</th>
 							<th>email address</th>
-							<th>last login</th>
 							<th>account type</th>
-							<th>account status</th>
+							<th>date of birth</th>
+							<th>gender</th>
+							<th>last login</th>
 						</tr>
 						</thead>
 						<tbody>
 						<?php
-                  	while($rws=  mysql_fetch_array($res2)){
-                        echo "<tr><td><input type='radio' name='user_id' value=".$rws[0];
-                        if($rws[0]==$rws2[0]){ echo ' checked'; }
-                        echo " /></td>";
-                        echo "<td>".$rws[0]."</td>";
-                        echo "<td>".$rws[1]."</td>";
-								echo "<td>".$rws[11]."</td>";
-								echo "<td>".$rws[7]."</td>";
-								echo "<td>".$rws[9]."</td>";
-								echo "<td>".$rws[4]."</td>";
-                        echo "<td>".$rws[10]."</td>";
-                        echo "</tr>";
-                     }
-                  ?>
+		                  	while($rws=  mysql_fetch_array($res2)){
+		                        echo "<tr><td><input type='radio' name='staff_id' value=".$rws[0];
+		                        if($rws[0]==$rws2[0]){ echo ' checked'; }
+		                        echo " /></td>";
+		                        echo "<td>".$rws[0]."</td>";
+		                        echo "<td>".$rws[1]."</td>";
+										echo "<td>".$rws[7]."</td>";
+										echo "<td>".$rws[8]."</td>";
+										echo "<td>".$rws[4]."</td>";
+										echo "<td>".$rws[3]."</td>";
+		                        echo "<td>".$rws[2]."</td>";
+		                        echo "<td>".$rws[10]."</td>";
+		                        echo "</tr>";
+		                     }
+                  		?>
 					  </tbody>
 					</table>
 					</div><br>
-					<button type="submit" class="btn btn-warning" name="edit_user"><i class="fas fa-user-edit"></i> Edit user</button>
-					<a href="#" class="btn btn-danger" id="pagesDropdown" data-toggle="modal" data-target="#deleteModal" aria-haspopup="true"><i class="fas fa-trash-alt"></i> Delete user</a>
+					<button type="submit" class="btn btn-warning" name="edit_staff"><i class="fas fa-user-edit"></i> Edit staff</button>
+					<a href="#" class="btn btn-danger" id="pagesDropdown" data-toggle="modal" data-target="#deleteModal" aria-haspopup="true"><i class="fas fa-trash-alt"></i> Delete staff</a>
 				</div>
 			  </div>
 			</div>
@@ -286,7 +327,7 @@ if(!isset($_SESSION['session_staff_start']))
 		  <div class="modal-dialog" role="document">
 			<div class="modal-content">
 			  <div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-exclamation-triangle"></i> Permanently delete this user?</h5>
+				<h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-exclamation-triangle"></i> Permanently delete this staff member?</h5>
 				<button class="close" type="button" data-dismiss="modal" aria-label="Close">
 				  <span aria-hidden="true">×</span>
 				</button>
@@ -296,15 +337,13 @@ if(!isset($_SESSION['session_staff_start']))
 			  <b>Remember</b>: If you want to warn a user first, set the <b>account status</b> to <b>disabled</b> by editing the account. After 2 warnings the account should be deleted.<br>
 			  	<small id="typeHelp" class="form-text">Reason</small>
 					<select class="form-control" name="delete_reason" required="required">
-						<option value="## inactive ##" selected>Inactive for a long period (+2 years)</option>
-						<option value="## unusual ##">Unusual or fraudulent activity</option>
-						<option value="## exploiting ##">User exploiting (premium) features</option>
+						<option value="## stopped ##" selected>Stopped working at UBank</option>
 						<option value="## other ##">Other</option>
 					</select>
 			 </div>
 			  <div class="modal-footer">
 				<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-				<button type="submit" class="btn btn-danger" name="delete_user"><i class="fas fa-trash-alt"></i> Delete this user!</button>
+				<button type="submit" class="btn btn-danger" name="delete_staff"><i class="fas fa-trash-alt"></i> Delete this user!</button>
 			  </div>
 			 </form>
 			</div>
