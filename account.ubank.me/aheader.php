@@ -18,7 +18,7 @@
     <li class="nav-item dropdown no-arrow mx-1">
       <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <i class="fas fa-bell fa-fw"></i>
-        <?php include '../_inc/dbconn.php';
+        <?php include '_inc/dbconn.php';
           $countsql = "SELECT COUNT(`id`) FROM UBankMAIN.security";
           $countresult = mysql_query($countsql) or die(mysql_error());
           $countres = mysql_fetch_array($countresult);

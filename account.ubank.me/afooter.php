@@ -18,6 +18,9 @@
       <i class="fas fa-angle-up"></i>
     </a>
 
+    <!-- Credits footer on every page -->
+    <div style="position: fixed;bottom: 0;right: 15px;background-color: #fff;box-shadow: 0 4px 8px rgba(0,0,0,.05);border-radius: 3px 3px 0 0;font-size: 12px;padding: 5px 10px;">Created by <a href="https://github.com/Tonemon" target="blank">Tonemon</a>.</div>
+
     <!-- Logout Modal-->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">

@@ -47,15 +47,13 @@
       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
 		    <h6 class="dropdown-header">Welcome <b><?php echo $_SESSION['session_staff_name']?></b>!</h6>
         <a class="dropdown-item" href="dashboard"><i class="fas fa-fw fa-tachometer-alt"></i> Dashboard</a>
-        <?php if ($staffdat_id == "1"){ ?>
-        <a class="dropdown-item" href="edit/admin?overview"><i class="fas fa-fw fa-crown"></i> Edit Admins</a>
-        <?php } if ($staffdat_account == "admin"){ ?>
-        <a class="dropdown-item" href="edit/staff?overview"><i class="fas fa-fw fa-user-edit"></i> Edit Staff</a>
-        <a class="dropdown-item" href="edit/users?overview"><i class="fas fa-fw fa-user-edit"></i> Edit Users</a>
+        <?php if ($staffdat_account == "admin"){ ?>
+        <a class="dropdown-item" href="staff?overview"><i class="fas fa-fw fa-user-edit"></i> Edit Staff</a>
+        <a class="dropdown-item" href="users?overview"><i class="fas fa-fw fa-user-edit"></i> Edit Users</a>
         <?php } elseif ($staffdat_account == "staff"){ ?>
-        <a class="dropdown-item" href="requests"><i class="fas fa-clipboard-list"></i> Card Requests</a>
-        <a class="dropdown-item" href="questions"><i class="fas fa-clipboard-list"></i> Questions Review</a>
-        <a class="dropdown-item" href="edit/users?overview"><i class="fas fa-fw fa-user-edit"></i> User accounts</a>
+        <a class="dropdown-item" href="requests"><i class="fas fa-clipboard-list"></i> Requests</a>
+        <a class="dropdown-item" href="questions"><i class="fas fa-clipboard-list"></i> Questions</a>
+        <a class="dropdown-item" href="users?overview"><i class="fas fa-fw fa-user-edit"></i> Edit Users</a>
         <?php } ?>
         <a class="dropdown-item" href="settings"><i class="fas fa-cogs"></i> Settings</a>
         <div class="dropdown-divider"></div>
@@ -102,7 +100,7 @@
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="edit/users?overview">
+      <a class="nav-link" href="users?overview">
         <i class="fas fa-fw fa-users"></i>
         <span>Edit Users</span>
       </a>

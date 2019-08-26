@@ -130,6 +130,9 @@ if(isset($_SESSION['session_staff_start']))
       </div>
     </div>
 
+    <!-- Credits footer on every page -->
+    <div style="position: fixed;bottom: 0;right: 15px;background-color: #fff;box-shadow: 0 4px 8px rgba(0,0,0,.05);border-radius: 3px 3px 0 0;font-size: 12px;padding: 5px 10px;">Created by <a href="https://github.com/Tonemon" target="blank">Tonemon</a>.</div>
+
     <!-- Core plugin JavaScript-->
 	<script src="../vendor/js/jquery.easing.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

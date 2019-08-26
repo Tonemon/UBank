@@ -69,7 +69,8 @@ if(!isset($_SESSION['session_staff_start']))
 		$result2 = mysql_query($sql2) or die(mysql_error());
 		$res2 = mysql_fetch_array($result2);
 ?>
-
+	
+	<?php include 'displayinfo.php' ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -97,10 +98,8 @@ if(!isset($_SESSION['session_staff_start']))
   </head>
   <body id="page-top">
     <?php include 'aheader.php' ?>
-    <?php include 'displayinfo.php' ?>
 
       <div id="content-wrapper">
-
         <div class="container-fluid">
 
           <!-- Breadcrumbs 
@@ -122,14 +121,6 @@ if(!isset($_SESSION['session_staff_start']))
 				  <i class="fas fa-user-edit"></i>
 				  Edit Selected Staff Member</div>
 				<div class="card-body">
-					<?php
-                        $delete_id=  mysql_real_escape_string($_REQUEST['staff_id']);
-                        if(isset($_REQUEST['submit2_id'])){
-                            $sql_delete="DELETE FROM `staff` WHERE `id` = '$delete_id'";
-                            mysql_query($sql_delete) or die(mysql_error());
-                            echo "<script type='text/javascript'> window.location.href = 'staff?deleted=1';</script>";
-                        }
-                    ?>
 					<form action="admin-edit" method="POST">
 						<input type="hidden" name="alter_id" value="<?php echo $staffid;?>"/>
 						<table>
@@ -167,12 +158,12 @@ if(!isset($_SESSION['session_staff_start']))
 								<td><input class="form-control" type="text" name="alter_mobile" value="<?php echo $res2[6]; ?>" required /></td>
 							</tr>
 							<tr>
-								<td>Username</td>
-								<td><input class="form-control" type="text" name="alter_username" value="<?php echo $res2[7]; ?>" required /></td>
-							</tr>
-							<tr>
 								<td>Email</td>
 								<td><input class="form-control" type="email" name="alter_email" value="<?php echo $res2[8]; ?>" required /></td>
+							</tr>
+							<tr>
+								<td>Username</td>
+								<td><input class="form-control" type="text" name="alter_username" value="<?php echo $res2[7]; ?>" required /></td>
 							</tr>
 						</table><br>
 						<small>Use the form below ONLY when changing password. Do not enter the old password.</small>

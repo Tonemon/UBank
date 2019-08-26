@@ -7,15 +7,6 @@ if(!isset($_SESSION['session_staff_start']))
 ?>
 <?php include 'displayinfo.php' ?>
 
-<?php /* NEED TO FIX THIS AND ADD MULTIPLE WHERE STATEMENTS (statements for actions, like delete user, add user... etc. )!!! Check unotes for more info!!
-	$delete_id = mysql_real_escape_string($_REQUEST['editadmin_id']);
-	if(isset($_REQUEST['delete_admin'])){
-		$sql_delete="DELETE FROM UBankMAIN.staff WHERE `id` = '$delete_id'";
-		mysql_query($sql_delete) or die(mysql_error());
-		header('location:admin?deleted=1');
-	} */
-?>
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -46,6 +37,15 @@ if(!isset($_SESSION['session_staff_start']))
 
       <div id="content-wrapper">
         <div class="container-fluid">
+
+        	<!-- Breadcrumbs 
+	          <ol class="breadcrumb">
+	            <li class="breadcrumb-item">
+	              <a href="#">Dashboard</a>
+	            </li>
+	            <li class="breadcrumb-item active">Overview</li>
+	          </ol> -->
+
         	<?php
 				if ($_GET['success'] == "1") {
 					echo "<div class='alert alert-success alert-dismissible'>
@@ -86,38 +86,6 @@ if(!isset($_SESSION['session_staff_start']))
 				} 
 			?>
 		<?php if ($staffdat_account == "admin"){ ?>
-		
-          <!-- Breadcrumbs 
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-              <a href="#">Dashboard</a>
-            </li>
-            <li class="breadcrumb-item active">Overview</li>
-          </ol> -->
-		  
-		  <?php
-				if (isset($_GET['add'])) {
-					echo "<div class='alert alert-success alert-dismissible'>
-						<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-						<i class='fas fa-check'></i>
-						New admin added. </div>";
-				} elseif (isset($_GET['deleted'])) {
-					echo "<div class='alert alert-success alert-dismissible'>
-						<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-						<i class='fas fa-check'></i>
-						Admin deleted.</div>";
-				} elseif (isset($_GET['edit'])) {
-					echo "<div class='alert alert-success alert-dismissible'>
-						<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-						<i class='fas fa-check'></i>
-						Admin information changed.</div>";
-				} /* elseif (isset($_GET['overview'])) {
-					echo "<div class='alert alert-warning alert-dismissible'>
-						<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-						<i class='fas fa-exclamation-triangle'></i>
-						<strong>Admin panel: </strong> Watch out while making changes to admin accounts. These can be harmful and irreversible!</div>";
-				} */
-			?>
 
 		  <div class="row text-center">
 			<div class="col-md-3"></div>
