@@ -11,7 +11,7 @@ Status of how much of the dashboard is done
 - admin-edit.php V
 - users.php V
 - users-edit.php V (combining customer-add, alter, approving, delete into edit)
-- settings.php
+- settings.php V
 - requests.php
 - questions.php
 

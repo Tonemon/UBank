@@ -28,7 +28,7 @@ if(!isset($_SESSION['session_staff_start']))
 		
 		// insert new admin to table 'staff'
 		$sql1 = "INSERT INTO UBankMAIN.staff values('','$new_name','$new_gender','$new_dob','$new_account','$new_address','$new_mobile','$new_username','$new_email','$new_password','')";
-		mysql_query($sql1) or die(header('location:admin?overview&error=2')); // on error displays: username/email already taken.
+		mysql_query($sql1) or die(header('location:admin?overview&error=2')); // Redirect, message: username/email already taken.
 		header('location:admin?all&success=1'); // on success displays: New staff member added.
 		
 	} elseif (isset($_REQUEST['delete_staff'])){ // Delete staff request
@@ -65,12 +65,16 @@ if(!isset($_SESSION['session_staff_start']))
 	} elseif (isset($_REQUEST['edit_staff'])){ // View note request
 		$staffid = $_POST['staff_id'];
 
-		$sql2 = "SELECT * FROM UBankMAIN.staff WHERE id='$staffid'";
-		$result2 = mysql_query($sql2) or die(mysql_error());
-		$res2 = mysql_fetch_array($result2);
+		if ($staffid == "1"){ // Don't let admin's change owner information
+			header('location:admin?all&error=4');
+		} else { // $staffid is not the id of the owner
+
+			$sql2 = "SELECT * FROM UBankMAIN.staff WHERE id='$staffid'";
+			$result2 = mysql_query($sql2) or die(mysql_error());
+			$res2 = mysql_fetch_array($result2);
 ?>
 	
-	<?php include 'displayinfo.php' ?>
+<?php include 'displayinfo.php' ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -189,6 +193,7 @@ if(!isset($_SESSION['session_staff_start']))
 <?php include 'afooter.php' ?>
 
 <?php	
+		}
 	} elseif (isset($_REQUEST['staff_alter'])){ // Update staff request
 		$alterid = $_POST['alter_id'];
 		

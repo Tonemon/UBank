@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 23, 2019 at 10:23 PM
+-- Generation Time: Aug 26, 2019 at 03:11 PM
 -- Server version: 5.6.37
 -- PHP Version: 5.6.31
 
@@ -19,6 +19,31 @@ SET time_zone = "+00:00";
 --
 -- Database: `UBankDAT`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `passbook`
+--
+
+CREATE TABLE IF NOT EXISTS `passbook` (
+  `transactionid` int(5) NOT NULL,
+  `transactiondate` date DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `branch` varchar(255) DEFAULT NULL,
+  `ifsc` varchar(255) DEFAULT NULL,
+  `credit` int(10) DEFAULT NULL,
+  `debit` int(10) DEFAULT NULL,
+  `amount` float(10,2) DEFAULT NULL,
+  `narration` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `passbook`
+--
+
+INSERT INTO `passbook` (`transactionid`, `transactiondate`, `name`, `branch`, `ifsc`, `credit`, `debit`, `amount`, `narration`) VALUES
+(1, '2019-08-26', 'Test testerd', '', '', 10000, 0, 10000.00, 'Account Open');
 
 -- --------------------------------------------------------
 
@@ -159,6 +184,12 @@ INSERT INTO `req_visacard` (`id`, `cust_name`, `account_no`, `visacard_status`, 
 --
 
 --
+-- Indexes for table `passbook`
+--
+ALTER TABLE `passbook`
+  ADD PRIMARY KEY (`transactionid`);
+
+--
 -- Indexes for table `passbook1`
 --
 ALTER TABLE `passbook1`
@@ -198,6 +229,11 @@ ALTER TABLE `req_visacard`
 -- AUTO_INCREMENT for dumped tables
 --
 
+--
+-- AUTO_INCREMENT for table `passbook`
+--
+ALTER TABLE `passbook`
+  MODIFY `transactionid` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `passbook1`
 --

@@ -82,16 +82,20 @@ if(isset($_SESSION['session_staff_start']))
       <div class="card card-login mx-auto mt-5">
         <div class="card-header text-center"><a href="http://ubank.me">&laquo;</a> UBank Staff Panel</div>
         <div class="card-body text-center">
+          <?php 
+            // success and error messages are displayed here.
+            if ($_GET['error'] == "1") {
+              echo "<div class='alert alert-danger'>
+                    <i class='fas fa-exclamation-triangle'></i>
+                    Wrong credentials. Please try again.</div>";
+            } elseif ($_GET['success'] == "1"){
+              echo "<div class='alert alert-success'>
+                    <i class='fas fa-check'></i> Password Changed. Login to continue.</div>";
+            } else {
+              echo "<p>Login below to your staff dashboard.</p>";
+            }
+          ?>
           <form action="" method="post" name="login_form">
-		    <?php
-				if (isset($_GET['error'])) {
-					echo "<div class='alert alert-danger'>
-								<i class='fas fa-exclamation-triangle'></i>
-								Wrong credentials. Please try again.</div>";
-				} else {
-					echo "<p>Login below to your staff dashboard.</p>";
-				}
-			?>
             <div class="form-group">
               <div class="form-label-group">
                 <input type="text" id="usern" class="form-control" name="loginuser" placeholder="Username or Email" required="required">

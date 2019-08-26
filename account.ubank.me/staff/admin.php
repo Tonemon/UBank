@@ -78,7 +78,7 @@ if(!isset($_SESSION['session_staff_start']))
 				} elseif ($_GET['error'] == "4") {
 					echo '<div class="col-xl-12 mb-6"><div class="alert alert-danger alert-dismissible">
 						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-						<i class="fas fa-exclamation-triangle"></i> You <b>cannot</b> remove the <b>owner account</b> (id 1). This would make a lot of functions unusable.</div>';
+						<i class="fas fa-exclamation-triangle"></i> You <b>cannot</b> remove/edit the <b>owner account</b> (id 1). This would make a lot of functions unusable.</div>';
 				} elseif ($_GET['error'] == "5") {
 					echo '<div class="col-xl-12 mb-6"><div class="alert alert-warning alert-dismissible">
 						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>

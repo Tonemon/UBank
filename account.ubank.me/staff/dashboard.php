@@ -76,9 +76,9 @@
 				<div class="card-body">
 					<span class="heading">Welcome </span><b><?php echo $staffdat_name; ?></b> <small>(<?php if ($staffdat_id == "1"){echo "owner";} else {echo "staff member";} ?>)</small>,<br>
 					<span class="heading">Your Last login was on </span><b><?php echo $staffdat_lastlogin; ?></b>,<br>
-					<span class="heading">Your Email is: </span><b><?php echo $staffdat_email; ?></b> and this is your </span><b><?php if ($staffdat_account == "admin"){ echo "admin"; } else { echo $staffdat_account;} ?></b> account.
+					<span class="heading">Your Email is: <b><?php echo $staffdat_email; ?></b> and this is your </span><b><?php if ($staffdat_account == "admin"){ echo "admin"; } else { echo $staffdat_account;} ?></b> account.
 				</div>
-				<div class="card-footer small text-muted">Updated <b>Today</b> at <?php echo date("H:i A (P)"); ?></i></div>
+				<div class="card-footer small text-muted">Updated <b>Today</b> at <?php echo date("H:i A (P)"); ?></div>
 			  </div>
 			</div>
 			<?php if ($staffdat_account == "admin"){ ?>
