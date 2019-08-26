@@ -48,11 +48,12 @@
 		    <h6 class="dropdown-header">Welcome <b><?php echo $_SESSION['session_staff_name']?></b>!</h6>
         <a class="dropdown-item" href="dashboard"><i class="fas fa-fw fa-tachometer-alt"></i> Dashboard</a>
         <?php if ($staffdat_account == "admin"){ ?>
+        <a class="dropdown-item" href="console?overview"><i class="fas fa-fw fa-terminal"></i> Maintenance</a>
         <a class="dropdown-item" href="staff?overview"><i class="fas fa-fw fa-user-edit"></i> Edit Staff</a>
         <a class="dropdown-item" href="users?overview"><i class="fas fa-fw fa-user-edit"></i> Edit Users</a>
         <?php } elseif ($staffdat_account == "staff"){ ?>
-        <a class="dropdown-item" href="requests"><i class="fas fa-clipboard-list"></i> Requests</a>
-        <a class="dropdown-item" href="questions"><i class="fas fa-clipboard-list"></i> Questions</a>
+        <a class="dropdown-item" href="requests?overview"><i class="fas fa-clipboard-list"></i> Requests</a>
+        <a class="dropdown-item" href="questions?review"><i class="fas fa-clipboard-list"></i> Questions</a>
         <a class="dropdown-item" href="users?overview"><i class="fas fa-fw fa-user-edit"></i> Edit Users</a>
         <?php } ?>
         <a class="dropdown-item" href="settings"><i class="fas fa-cogs"></i> Settings</a>
@@ -75,6 +76,12 @@
     </li>
     <?php if ($staffdat_account == "admin"){ ?>
     <li class="nav-item">
+      <a class="nav-link" href="console?overview">
+        <i class="fas fa-terminal"></i>
+        <span>Maintenance</span>
+      </a>
+    </li>
+    <li class="nav-item">
       <a class="nav-link" href="admin?overview">
         <i class="fas fa-fw fa-user-edit"></i>
         <span>Edit Staff</span>
@@ -88,13 +95,13 @@
     </li>
     <?php } elseif ($staffdat_account == "staff"){ ?>
 		<li class="nav-item">
-      <a class="nav-link" href="requests">
+      <a class="nav-link" href="requests?overview">
         <i class="fas fa-clipboard-list"></i>
         <span>Requests</span>
       </a>
     </li>
 		<li class="nav-item">
-      <a class="nav-link" href="questions">
+      <a class="nav-link" href="questions?review">
         <i class="fas fa-clipboard-list"></i>
         <span>Questions</span>
       </a>

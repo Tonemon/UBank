@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 26, 2019 at 03:11 PM
+-- Generation Time: Aug 26, 2019 at 07:41 PM
 -- Server version: 5.6.37
 -- PHP Version: 5.6.31
 
@@ -120,8 +120,8 @@ CREATE TABLE IF NOT EXISTS `questions` (
 INSERT INTO `questions` (`id`, `name`, `email`, `question`, `message`, `status`, `readby`, `askedby`, `time`) VALUES
 (2, 'John Doe', 'johndoe@gmail.com', 'Services', 'Hi, I would like to know more about the two account types and which one will suit me the best. I am trying to save some money for later. Greets, John', 'TO REVIEW', '', 'Homepage', '2019-01-20 08:44:25'),
 (6, 'John Watson', 'johnwatson@mail.com', 'Job', 'Hi, I would like to apply for a job at UBank. Could you please send me all the information I need to send to you?', 'TO REVIEW', '', 'Homepage', '2019-01-20 09:54:58'),
-(7, 'Bert Geertsen', 'bgeertsen@mail.com', 'Banking', 'Hello, I lost my password for my savings account. Could you please help me to recover it? I have all of my information ready and I can verify myself.', 'DOING', 'Dan Cody', 'Homepage', '2019-01-21 06:50:52'),
-(13, 'Adam Ronald', 'adam@ubank.me', '(C) Job', 'Hello, I was wondering how long exactly would it take to ship a ''visa card'' to me. I live in the US and need one, because my old one broke last night.', 'REVIEWED', 'Dan Cody', 'Support Panel', '2019-01-21 07:41:43');
+(7, 'Bert Geertsen', 'bgeertsen@mail.com', 'Banking', 'Hello, I lost my password for my savings account. Could you please help me to recover it? I have all of my information ready and I can verify myself.', 'TO REVIEW', '', 'Homepage', '2019-01-21 06:50:52'),
+(13, 'Adam Ronald', 'adam@ubank.me', 'Job', 'Hello, I was wondering how long exactly would it take to ship a ''visa card'' to me. I live in the US and need one, because my old one broke last night.', 'REVIEWED', 'James Carter', 'Support Panel', '2019-01-21 07:41:43');
 
 -- --------------------------------------------------------
 

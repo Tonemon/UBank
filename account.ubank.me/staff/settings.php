@@ -1,9 +1,9 @@
 <?php 
-session_start();
-include '../_inc/dbconn.php';
+	session_start();
+	include '../_inc/dbconn.php';
 
-if(!isset($_SESSION['session_staff_start'])) 
-    header('location:../staff/');   
+	if(!isset($_SESSION['session_staff_start'])) 
+    	header('location:../staff/');   
 ?>
 <?php include 'displayinfo.php' ?>
 

@@ -122,15 +122,15 @@
 						<tbody>
 						<tr>
 							<td width="300px"><span class="heading"><b>Mastercard, Creditcard and Visacard requests</b>.</span><br><br></td>
-							<td><a href="requests" class="btn btn-success"><i class="fas fa-link"></i> Requests &raquo;</a><br><br></td>
+							<td><a href="requests?overview" class="btn btn-success"><i class="fas fa-link"></i> Requests &raquo;</a><br><br></td>
 						</tr>
 						<tr>
 							<td><span class="heading"><b>Support (questions) Panel</b>.</span></td>
-							<td><a href="questions" class="btn btn-success"><i class="fas fa-link"></i> Questions &raquo;</a></td>
+							<td><a href="questions?review" class="btn btn-success"><i class="fas fa-link"></i> Questions &raquo;</a></td>
 						</tr>
 						<tr>
 							<td><span class="heading"><b>Add/Edit/Delete Users</b>.</span><br></td>
-							<td><a href="edit/users?overview" class="btn btn-success"><i class="fas fa-link"></i> Users &raquo;</a><br></td>
+							<td><a href="users?overview" class="btn btn-success"><i class="fas fa-link"></i> Users &raquo;</a><br></td>
 						</tr>
 						</tbody>
 					</table>

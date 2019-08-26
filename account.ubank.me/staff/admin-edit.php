@@ -6,10 +6,6 @@ if(!isset($_SESSION['session_staff_start']))
     header('location:../staff/');   
 ?>
 <?php
-	//$id=  mysql_real_escape_string($_REQUEST['staff_id']);
-	//$sql="SELECT * FROM UBankMAIN.staff WHERE id=$id";
-	//$result=  mysql_query($sql) or die(mysql_error());
-	//$rws=  mysql_fetch_array($result);
 	if (isset($_REQUEST['add_staff'])){ // Create user request
 		// variables from user information
 		$new_name=  mysql_real_escape_string($_REQUEST['admin_name']);

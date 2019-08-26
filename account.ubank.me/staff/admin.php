@@ -162,7 +162,6 @@ if(!isset($_SESSION['session_staff_start']))
 						<input type="submit" class="btn btn-success" name="add_staff" value="Add new Admin" class='addstaff_button'/>
 					</form>
 				</div>
-				<div class="card-footer small text-muted">Updated <b>Today</b> at <?php echo date("H:i A (P)"); ?></div>
 			  </div>
 			</div>
 			<div class="col-xl-8 mb-6">
