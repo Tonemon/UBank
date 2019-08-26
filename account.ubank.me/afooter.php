@@ -18,6 +18,9 @@
       <i class="fas fa-angle-up"></i>
     </a>
 
+    <!-- Credits footer on every page -->
+    <div style="position: fixed;bottom: 0;right: 15px;background-color: #fff;box-shadow: 0 4px 8px rgba(0,0,0,.05);border-radius: 3px 3px 0 0;font-size: 12px;padding: 5px 10px;">Created by <a href="https://github.com/Tonemon" target="blank">Tonemon</a>.</div>
+
     <!-- Logout Modal-->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
@@ -38,23 +41,23 @@
     </div>
 
 	<!-- Bootstrap core JavaScript-->
-    <script src="vendor/js/jquery.min.js"></script>
-    <script src="vendor/js/bootstrap.bundle.min.js"></script>
+    <script src="../vendor/js/jquery.min.js"></script>
+    <script src="../vendor/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="vendor/js/jquery.easing.min.js"></script>
+    <script src="../vendor/js/jquery.easing.min.js"></script>
 
     <!-- Page level plugin JavaScript-->
-    <script src="vendor/js/chart.js/Chart.min.js"></script>
-    <script src="vendor/js/datatables/jquery.dataTables.js"></script>
-    <script src="vendor/js/datatables/dataTables.bootstrap4.js"></script>
+    <script src="../vendor/js/chart.js/Chart.min.js"></script>
+    <script src="../vendor/js/datatables/jquery.dataTables.js"></script>
+    <script src="../vendor/js/datatables/dataTables.bootstrap4.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="vendor/js/sb-admin.min.js"></script>
-	<script src="vendor/js/scroll.min.js"></script>
+    <script src="../vendor/js/sb-admin.min.js"></script>
+	<script src="../vendor/js/scroll.min.js"></script>
 
     <!-- Demo scripts for this page-->
-    <script src="vendor/js/demo/datatables-demo.js"></script>
-    <script src="vendor/js/demo/chart-area-demo.js"></script>
+    <script src="../vendor/js/demo/datatables-demo.js"></script>
+    <script src="../vendor/js/demo/chart-area-demo.js"></script>
   </body>
 </html>

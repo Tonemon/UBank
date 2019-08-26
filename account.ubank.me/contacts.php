@@ -1,33 +1,10 @@
 <?php 
 session_start();
         
-if(!isset($_SESSION['customer_login'])) 
+if(!isset($_SESSION['session_user_start'])) 
     header('location:index.php');   
 ?>
-<?php
-                $cust_id=$_SESSION['cust_id'];
-                include '_inc/dbconn.php';
-                $sql="SELECT * FROM customer WHERE email='$cust_id'";
-                $result=  mysql_query($sql) or die(mysql_error());
-                $rws=  mysql_fetch_array($result);
-                
-                
-                $name= $rws[1];
-                $account_no= $rws[0];
-                $branch=$rws[10];
-                $branch_code= $rws[11];
-                $last_login= $rws[12];
-                $acc_status=$rws[13];
-                $address=$rws[6];
-                $acc_type=$rws[5];
-                
-                $gender=$rws[2];
-                $mobile=$rws[7];
-                $email=$rws[8];
-                
-                $_SESSION['login_id']=$account_no;
-                $_SESSION['name']=$name;
-                ?>
+<?php include 'displayinfo.php' ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -52,7 +29,7 @@ if(!isset($_SESSION['customer_login']))
     <!-- Page level plugin CSS-->
     <link href="vendor/js/datatables/dataTables.bootstrap4.css" rel="stylesheet">
 	
-	<title>Contacts | UBank</title>
+	<title><?php echo $userdat_name; ?>'s Contacts | UBank Online Banking</title>
   </head>
   <body id="page-top">
     <?php include 'aheader.php' ?>
@@ -105,18 +82,18 @@ if(!isset($_SESSION['customer_login']))
 				<div class="card-body">
 					<?php
 						include '_inc/dbconn.php';
-						$sender_id=$_SESSION["login_id"];
-						$sql="SELECT * FROM contacts WHERE sender_id='$sender_id'";
+						$requester_id = $_SESSION["session_user_id"];
+						$sql = "SELECT * FROM UBankMAIN.contacts WHERE sender_id='$requester_id'";
 						$result=  mysql_query($sql) or die(mysql_error());
 					?>
 					
-					<form action="process_delete_contact.php">
+					<form action="process_contact_delete.php">
 					<div class="table-responsive">
-					<table class="table table-bordered" width="100%" cellspacing="0">
+					<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 						<?php
 							include '_inc/dbconn.php';
-							$sender_id=$_SESSION["login_id"];
-							$sql="SELECT * FROM contacts WHERE sender_id='$sender_id'";
+							$request_id=$_SESSION["session_user_id"];
+							$sql="SELECT * FROM UBankMAIN.contacts WHERE sender_id='$request_id'";
 							$result=  mysql_query($sql) or die(mysql_error());
 						?>
 						<thead>
@@ -129,20 +106,20 @@ if(!isset($_SESSION['customer_login']))
 					  </thead>
 					  <tbody>
 						<?php
-                        while($rws=  mysql_fetch_array($result)){
+                        while ($rws = mysql_fetch_array($result)){
                             
-                            echo "<tr><td><input type='radio' name='customer_id' value=".$rws[0];
+                            echo "<tr><td><input type='radio' name='contact_id' value=".$rws[0];
                             echo ' checked';
                             echo " /></td>";
                             echo "<td>".$rws[4]."</td>";
                             echo "<td>".$rws[5]."</td>";
-                            echo "<td>No. ".$rws[3]."</td>";
+                            echo "<td>".$rws[3]."</td>";
                            
                             echo "</tr>";
                         } ?>
 					  </tbody>
 					</table>
-					<p><i class="fas fa-info-circle"></i> <i>You can add the same contact if you deleted it on accident.</i></p>
+					<p><i class="fas fa-info-circle"></i> <i>You can re-add the same contact if you deleted it on accident.</i></p>
 					<a href="#" class="btn btn-danger" id="pagesDropdown" data-toggle="modal" data-target="#deleteContactModal" aria-haspopup="true">Delete Contact</a>
 					</div>
 				</div>
@@ -159,10 +136,10 @@ if(!isset($_SESSION['customer_login']))
 					  <span aria-hidden="true">×</span>
 					</button>
 				  </div>
-				  <div class="modal-body">Are you sure you want to delete this contact? <br> <i>You can add the same contact when deleted on accident.</i></div>
+				  <div class="modal-body">Are you sure you want to delete this contact? You can re-add the same contact when deleted on accident.</div>
 				  <div class="modal-footer">
 					<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-					<input type="submit" class="btn btn-danger" name="submit_id" value="Delete Contact" />
+					<input type="submit" class="btn btn-danger" name="contact_delete" value="Delete Contact" />
 					</form>
 				  </div>
 				</div>
@@ -178,14 +155,14 @@ if(!isset($_SESSION['customer_login']))
 				  <i class="fas fa-user-plus"></i>
 				  Add Contact</div>
 				<div class="card-body">
-					<form action='process_add_contact.php' method='post'>
+					<form action='process_contact_add.php' method='post'>
 						<table>
-							<tr><td><span class="heading">Contact Name: </span></td><td><input type='text' name='name' required></td></tr>
-							<tr><td><span class="heading">Account No: </span></td><td><input type='text' name='account_no' required></td></tr>
+							<tr><td><span class="heading">Contact Name: </span></td><td><input class="form-control" type='text' name='contact_name' required></td></tr>
+							<tr><td><span class="heading">Account No: </span></td><td><input class="form-control" type='text' name='contact_account_no' required></td></tr>
 							<tr><td><span class="heading">Ifsc Code: </span><br><small><a href="#" id="pagesDropdown" data-toggle="modal" data-target="#informationModal">What is this?</a></small></td>
-								<td><input type='text' name='ifsc_code' required></td></tr>
+								<td><input class="form-control" type='text' name='contact_ifsc_code' required></td></tr>
 							<tr><td><span class="heading">Select Country: &nbsp;</span></td><td>
-							<select name='branch_select' required>
+							<select class="form-control" name="contact_branch_select" required>
 								<option value='United States'>United States (US)</option>
 								<option value='United Kingdom'>United Kingdom (UK)</option>
 								<option value='Netherlands'>Netherlands (NL)</option>
@@ -216,7 +193,7 @@ if(!isset($_SESSION['customer_login']))
 					The following information can be found on your <i class="fab fa-cc-mastercard"></i> <b>Mastercard</b>, <i class="fas fa-credit-card"></i><b> Creditcard </b>or <i class="fab fa-cc-visa"></i><b> Visa Card</b>.
 						<ul>
 							<li><b>Contact name</b>, must be right, can't be a nickname.</li>
-							<li><b>Account no.</b>, to make the funds to.</li>
+							<li><b>Account number</b>, to make the funds to.</li>
 							<li><b>Ifsc code</b>, can be found on the front of the card.</li>
 							<li><b>Branch</b>, can be found next to the Ifsc code.</li>
 						</ul>

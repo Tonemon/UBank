@@ -2,10 +2,9 @@
 	session_start();
 	include '../_inc/dbconn.php';
 	
-	$date=date('Y-m-d h:i:s');
-	// $date=$_SESSION['staff_date']; this is not working
-	$id=$_SESSION['id'];
-	$sql="UPDATE staff SET lastlogin='$date' WHERE id='$id'";
+	$date=date('Y-m-d H:i:s');
+	$id=$_SESSION['session_staff_id'];
+	$sql="UPDATE UBankMAIN.staff SET lastlogin='$date' WHERE id='$id'";
 	mysql_query($sql) or die(mysql_error());
 
 	session_destroy();
