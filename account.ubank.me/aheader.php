@@ -84,6 +84,12 @@
         <span>Contacts</span>
       </a>
     </li>
+    <li class="nav-item">
+      <a class="nav-link" href="simulator">
+        <i class="fas fa-funnel-dollar"></i>
+        <span>ATM Simulator</span>
+      </a>
+    </li>
 		<li class="nav-item">
       <a class="nav-link" href="settings">
         <i class="fas fa-fw fa-cogs"></i>

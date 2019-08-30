@@ -177,6 +177,7 @@
 						}            
 					?>
 					<span class="heading">Current Balance: $</span><b><?php echo $user_balance;?></b><br><br>
+					<span class="heading">Name on Card: </span><b><?php echo $userdat_name;?></b><br>
 					<span class="heading">Ifsc Code: </span><b><?php echo $userdat_branchcode;?></b><br>
 					<span class="heading">Country: </span><b><?php echo $userdat_branch;?></b><br>
 					<span class="heading">Your Account No: </span><b><?php echo $userdat_id;?></b>

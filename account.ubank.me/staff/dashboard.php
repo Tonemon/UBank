@@ -74,7 +74,7 @@
                     <i class="fas fa-user"></i>
                 </div>
 				<div class="card-body">
-					<span class="heading">Welcome </span><b><?php echo $staffdat_name; ?></b> <small>(<?php if ($staffdat_id == "1"){echo "owner";} else {echo "staff member";} ?>)</small>,<br>
+					<span class="heading">Welcome </span><b><?php echo $staffdat_name; ?></b> <small>(<?php if ($staffdat_id == "1"){echo "owner";} elseif ($staffdat_account == "admin") { echo "admin member"; } else { echo "staff member";} ?>)</small>,<br>
 					<span class="heading">Your Last login was on </span><b><?php echo $staffdat_lastlogin; ?></b>,<br>
 					<span class="heading">Your Email is: <b><?php echo $staffdat_email; ?></b> and this is your </span><b><?php if ($staffdat_account == "admin"){ echo "admin"; } else { echo $staffdat_account;} ?></b> account.
 				</div>
@@ -104,7 +104,7 @@
 						</tr>
 						</tbody>
 					</table>
-					<small><i>Only an Admin/Owner can see this panel.</i></small>
+					<small><i>Only an Admin can see this panel.</i></small>
 				</div>
 			  </div>
 			</div>
@@ -134,6 +134,7 @@
 						</tr>
 						</tbody>
 					</table>
+					<small><i>Only a staff member can see this panel.</i></small>
 				</div>
 			  </div>
 			</div>
