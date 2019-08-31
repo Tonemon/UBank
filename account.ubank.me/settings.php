@@ -7,6 +7,46 @@ if(!isset($_SESSION['session_user_start']))
 ?>
 <?php include 'displayinfo.php' ?>
 
+<?php
+	if (isset($_REQUEST['submit_password'])){ // Change password request
+		$changeid = $_SESSION['session_user_id'];
+
+		$sql = "SELECT * FROM UBankMAIN.users WHERE id='$changeid'";
+		$result = mysql_query($sql);
+		$rws = mysql_fetch_array($result);
+						
+		$salt = "@g26jQsG&nh*&#8v";
+		$old = sha1($_REQUEST['old_password'].$salt);
+		$new = sha1($_REQUEST['new_password'].$salt);
+		$again = sha1($_REQUEST['again_password'].$salt);
+						
+		if ($rws[8] == $old && $new == $again){
+			$sql1 = "UPDATE UBankMAIN.users SET password='$new' WHERE id='$changeid'";
+			mysql_query($sql1) or die(mysql_error());
+
+			session_destroy(); // destroying session to let the user login again using new password
+			header('location:index?password=1');
+
+		}
+	} elseif (isset($_REQUEST['submit_question'])){ // Submit request process
+		// getting variables to store in table
+		$name = mysql_real_escape_string($_REQUEST['q_name']);
+		$email = mysql_real_escape_string($_REQUEST['q_email']);
+		$type = mysql_real_escape_string($_REQUEST['q_type']);
+		$message = mysql_real_escape_string($_REQUEST['q_message']);
+
+		// variables to set on the go
+		$status = "TO REVIEW";
+		$from = "Support Panel";
+		$date = date('Y-m-d h:i:s');
+
+		// insert question to table 'users'
+		$sql = "INSERT INTO UBankDAT.questions values('','$name','$email','$type','$message','$status','','$from','$date')";
+		mysql_query($sql) or die("Your question could not be submitted. Please try again later.");
+		header('location:settings?send=1');
+	} else {
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -72,7 +112,7 @@ if(!isset($_SESSION['session_user_start']))
 				  Support Panel</div>
 				<div class="card-body">
 					<p>If you got any questions please submit the form below and we will answer it as soon as possible.</p>
-					<form action="process_question.php" method="POST">
+					<form action="settings" method="POST">
 						<table>
 							<tr>
 								<td>First name:</td>
@@ -103,7 +143,6 @@ if(!isset($_SESSION['session_user_start']))
 						<input type="submit" class="btn btn-success" name="submit_question" value="Submit my Message"/>
 					</form>
 				</div>
-				<div class="card-footer small text-muted">Updated <b>Today</b> at <?php echo date("H:i A (P)"); ?></i></div>
 			  </div>
 			</div>
 			<div class="col-xl-4 mb-6">
@@ -115,7 +154,7 @@ if(!isset($_SESSION['session_user_start']))
                     <i class="fas fa-user-cog"></i>
                 </div>
 				<div class="card-body">
-					<form action="process_password_edit.php" method="POST">
+					<form action="settings" method="POST">
 						<table>
 							<tr>
 								<td>Enter old password:</td>
@@ -130,13 +169,14 @@ if(!isset($_SESSION['session_user_start']))
 								<td><input class="form-control" type="password" name="again_password" required=""/></td>
 							</tr>
 						</table><br>
-						<input type="submit" class="btn btn-success" name="change_password" value="Change my Password"/>
+						<input type="submit" class="btn btn-success" name="submit_password" value="Change my Password"/>
 					</form>
 				</div>
-				<div class="card-footer small text-muted">Updated <b>Today</b> at <?php echo date("H:i A (P)"); ?></i></div>
 			  </div>
 			</div>
 		  </div> <!-- /.row -->
         </div><!-- /.container-fluid -->
 
     <?php include 'afooter.php' ?>
+
+<?php } ?>

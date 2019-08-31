@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 26, 2019 at 07:41 PM
+-- Generation Time: Aug 31, 2019 at 01:56 PM
 -- Server version: 5.6.37
 -- PHP Version: 5.6.31
 
@@ -23,31 +23,6 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `passbook`
---
-
-CREATE TABLE IF NOT EXISTS `passbook` (
-  `transactionid` int(5) NOT NULL,
-  `transactiondate` date DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `branch` varchar(255) DEFAULT NULL,
-  `ifsc` varchar(255) DEFAULT NULL,
-  `credit` int(10) DEFAULT NULL,
-  `debit` int(10) DEFAULT NULL,
-  `amount` float(10,2) DEFAULT NULL,
-  `narration` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `passbook`
---
-
-INSERT INTO `passbook` (`transactionid`, `transactiondate`, `name`, `branch`, `ifsc`, `credit`, `debit`, `amount`, `narration`) VALUES
-(1, '2019-08-26', 'Test testerd', '', '', 10000, 0, 10000.00, 'Account Open');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `passbook1`
 --
 
@@ -61,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `passbook1` (
   `debit` int(10) DEFAULT NULL,
   `amount` float(15,2) DEFAULT NULL,
   `narration` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `passbook1`
@@ -86,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `passbook2` (
   `debit` int(10) DEFAULT NULL,
   `amount` float(10,2) DEFAULT NULL,
   `narration` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `passbook2`
@@ -170,7 +145,7 @@ CREATE TABLE IF NOT EXISTS `req_visacard` (
   `account_no` int(10) NOT NULL,
   `visacard_status` varchar(25) NOT NULL,
   `visacard_date` date NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `req_visacard`
@@ -182,12 +157,6 @@ INSERT INTO `req_visacard` (`id`, `cust_name`, `account_no`, `visacard_status`, 
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `passbook`
---
-ALTER TABLE `passbook`
-  ADD PRIMARY KEY (`transactionid`);
 
 --
 -- Indexes for table `passbook1`
@@ -230,20 +199,15 @@ ALTER TABLE `req_visacard`
 --
 
 --
--- AUTO_INCREMENT for table `passbook`
---
-ALTER TABLE `passbook`
-  MODIFY `transactionid` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
---
 -- AUTO_INCREMENT for table `passbook1`
 --
 ALTER TABLE `passbook1`
-  MODIFY `transactionid` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `transactionid` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `passbook2`
 --
 ALTER TABLE `passbook2`
-  MODIFY `transactionid` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `transactionid` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `questions`
 --
@@ -263,7 +227,7 @@ ALTER TABLE `req_mastercard`
 -- AUTO_INCREMENT for table `req_visacard`
 --
 ALTER TABLE `req_visacard`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
