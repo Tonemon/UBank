@@ -1,39 +1,49 @@
 <?php 
 	include '_inc/dbconn.php'; 
 ?>
+
+<?php
+	if (isset($_REQUEST['submit_contact'])){ // Submit contact form request
+		// getting variables to store in table
+		$firstname = mysql_real_escape_string($_REQUEST['q_firstname']);
+		$surname = mysql_real_escape_string($_REQUEST['q_surname']);
+		$fullname = $firstname . ' ' . $surname;
+
+		$email = mysql_real_escape_string($_REQUEST['q_email']);
+		$type = mysql_real_escape_string($_REQUEST['q_type']);
+		$message = mysql_real_escape_string($_REQUEST['q_message']);
+
+		// variables to set on the go
+		$status = "TO REVIEW";
+		$from = "Homepage";
+		$date = date('Y-m-d h:i:s');
+
+		// insert question to table 'questions'
+		$insertsql = "INSERT INTO UBankDAT.questions values('','$fullname','$email','$type','$message','$status','','$from','$date')";
+		mysql_query($insertsql) or die(header('location:contact?error=1'));
+		header('location:contact?send=1');
+	} else {
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta name="description" content="Contact Us | UBank Online Banking">
 		<meta name="author" content="UBank Group">
 		
-		<title>Contact Us | UBank</title>
+		<title>Contact Us | UBank Online Banking</title>
 
 	<!-- PHP header here -->
 	<?php include 'index-header.php'; ?>
 	
-    <!-- Page Content -->
-	<?php
-				if (isset($_GET['send'])) {
-					echo "<br><div class='alert alert-success alert-dismissible'>
-						<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-						<i class='fas fa-check'></i> Question send. We will try to answer it as soon as possible. </div>";
-				} elseif (isset($_GET['error'])) {
-					echo "<br><div class='alert alert-danger alert-dismissible'>
-						<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-						<i class='fas fa-exclamation-triangle'></i> Something went wrong and your question could not be send. Please try again later.</div>";
-				}
-	?>
 	<div class="contact" id="contact">
 	  <div class="row mt-5">
 		<div class="col-lg-1"></div>
 		<div class="col-lg-7">
 			<h1>Contact Us</h2>
 			<hr class=" accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 40%;">
-			<p>Have you checked our <a href="faq">FAQ</a> already? <i class="far fa-smile"></i> Most of the questions asked by our customers (and the answers) can be found there.
-			If you still can't find an answer feel free to contact us using one of the methods on the right or use
-			 our question form below. <br><br> If you want to receive information about our services or the UBank Online Banking platform please subscribe to our newsletter <a href="#">here</a>.</p><br>
-			 <p><a class="btn btn-primary js-scroll-trigger" href="faq" role="button">Read our FAQ &raquo;</a> <a class="btn btn-primary js-scroll-trigger" href="#contactform" role="button">Ask a question &raquo;</a><p>
+			<p>Have you checked our <a href="faq">FAQ</a> already? Most of the questions asked by our users can be found there with an easy to follow answer. If you still can't find an answer feel free to contact us using one of the methods on the right of this paragraph or use our question form below. While using the question form below please make sure to select the right category of your question, so it could be answered as soon as possible by the right staff. <br><br> If you want to receive information about our services or the UBank Online Banking platform please subscribe to our newsletter <a href="#">here</a>.</p><br>
+			 <p><a class="btn btn-primary" href="faq" role="button">Read our FAQ &raquo;</a> <a class="btn btn-primary js-scroll-trigger" href="#contactform" role="button">Ask us a question &raquo;</a><p>
 		</div>
 		<div class="col-lg-3">
           <!-- Links -->
@@ -59,7 +69,20 @@
 	</div>
 	
 	<!-- contact form -->
-	  <div class="row contact bg-blue-light" id="contactform">
+	  <div class="row contact bg-blue-light" id="#contactform">
+	  	<div class="col-lg-12">
+			<?php
+				if (isset($_GET['send'])) {
+					echo "<br><div class='alert alert-success alert-dismissible'>
+						<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+						<i class='fas fa-check'></i> Question send. We will try to answer it as soon as possible. </div>";
+				} elseif (isset($_GET['error'])) {
+					echo "<br><div class='alert alert-danger alert-dismissible'>
+						<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+						<i class='fas fa-exclamation-triangle'></i> Something went wrong and your question could not be send. Please try again later.</div>";
+				}
+			?>
+		</div>
 	    <div class="col-lg-1"></div>
 		<div class="col-lg-4">
 		  <h1>Contact Form</h2>
@@ -69,7 +92,7 @@
 		</div>
 		<div class="col-lg-1"></div>
 		<div class="col-lg-5"><br><br>
-		  <form id="contact-form" method="post" action="contact-process.php" role="form">
+		  <form id="contact-form" method="post" action="contact" role="form">
 			<div class="messages"></div>
 			<div class="controls">
 					<div class="row">
@@ -120,7 +143,7 @@
 							</div>
 						</div>
 						<div class="col-md-12">
-							<input type="submit" class="btn btn-success btn-send" value="Send message &raquo;">
+							<input type="submit" class="btn btn-success btn-send" name="submit_contact" value="Send message &raquo;">
 						</div>
 					</div>
 			 </div>
@@ -135,27 +158,28 @@
         <div class="row">
           <div class="col-md-3 col-sm-6">
             <a href="#">
-              <img class="img-fluid d-block mx-auto" src="vendor/img/partner_envato.png" alt="">
+              <img class="img-fluid d-block mx-auto" width="200px" height="50px" src="vendor/img/partner1.png" alt="">
             </a>
           </div>
           <div class="col-md-3 col-sm-6">
             <a href="#">
-              <img class="img-fluid d-block mx-auto" src="vendor/img/partner_designmodo.png" alt="">
+              <img class="img-fluid d-block mx-auto" width="150px" height="50px" src="vendor/img/partner2.png" alt="">
             </a>
           </div>
           <div class="col-md-3 col-sm-6">
             <a href="#">
-              <img class="img-fluid d-block mx-auto" src="vendor/img/partner_themeforest.png" alt="">
+              <img class="img-fluid d-block mx-auto" width="200px" height="50px" src="vendor/img/partner3.png" alt="">
             </a>
           </div>
           <div class="col-md-3 col-sm-6">
             <a href="#">
-              <img class="img-fluid d-block mx-auto" src="vendor/img/partner_creativemarket.png" alt="">
+              <img class="img-fluid d-block mx-auto" src="vendor/img/partner4.png" alt="">
             </a>
           </div>
         </div>
       </div>
     </section>
 
-	<!-- PHP footer here -->
 	<?php include 'index-footer.php' ?>
+
+<?php } ?>

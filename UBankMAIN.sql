@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 24, 2019 at 10:39 AM
+-- Generation Time: Aug 31, 2019 at 01:56 PM
 -- Server version: 5.6.37
 -- PHP Version: 5.6.31
 
@@ -33,15 +33,15 @@ CREATE TABLE IF NOT EXISTS `contacts` (
   `reciever_id` int(10) NOT NULL,
   `reciever_name` varchar(255) NOT NULL,
   `status` varchar(15) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `contacts`
 --
 
 INSERT INTO `contacts` (`id`, `sender_id`, `sender_name`, `reciever_id`, `reciever_name`, `status`) VALUES
-(3, 1, 'Adam Ronald', 2, 'Henry Hart', 'ACTIVE'),
-(4, 2, 'Henry Hart', 1, 'Adam Ronald', 'ACTIVE');
+(1, 1, 'Adam Ronald', 2, 'Henry Hart', 'ACTIVE'),
+(2, 2, 'Henry Hart', 1, 'Adam Ronald', 'ACTIVE');
 
 -- --------------------------------------------------------
 
@@ -118,9 +118,9 @@ CREATE TABLE IF NOT EXISTS `staff` (
 --
 
 INSERT INTO `staff` (`id`, `name`, `gender`, `dob`, `account`, `address`, `mobile`, `username`, `email`, `password`, `lastlogin`) VALUES
-(1, 'James Carter', 'M', '1994-01-01', 'admin', 'street 5', '00001111', 'admin', 'admin@ubank.me', 'f31e9910ef963fb172fe8148a155eb6a67b96d89', '2019-08-24 08:49:11'),
-(2, 'Bob Adams', 'M', '1996-01-01', 'admin', 'street 7', '00002222', 'bob', 'bob@ubank.me', '4ee51c0e3146c56a792f837fb30ebd21ddd873a6', '2019-08-24 08:49:24'),
-(3, 'Dan Cody', 'M', '1960-02-08', 'staff', 'street 8', '00004444', 'dan', 'dan@ubank.me', 'a4b562900e7d84c3044bf91388fbc31569064c30', '2019-08-24 08:47:25');
+(1, 'James Carter', 'M', '1994-01-01', 'admin', 'street 5', '00001111', 'owner', 'owner@ubank.me', 'd5b64884d4b9b23204722c27fc9451a4e2a06204', '2019-08-26 20:10:43'),
+(2, 'Bob Adams', 'M', '1996-01-01', 'admin', 'street 7', '00002222', 'admin', 'admin@ubank.me', 'f31e9910ef963fb172fe8148a155eb6a67b96d89', '2019-08-26 20:01:27'),
+(3, 'Dan Cody', 'M', '1960-02-08', 'staff', 'street 8', '00004444', 'staff', 'staff@ubank.me', '3d61923755697ee42404c7a97ca6b2f5f7a91243', '2019-08-26 19:59:52');
 
 -- --------------------------------------------------------
 
@@ -175,8 +175,8 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `gender`, `dob`, `account`, `address`, `mobile`, `email`, `password`, `username`, `branch`, `ifsc`, `lastlogin`, `accstatus`) VALUES
-(1, 'Adam Ronald', 'M', '2001-01-01', 'current', 'street 5', '000113', 'adam@ubank.me', '561c62b788bde046b2f0731835fe9770bb44231f', 'adam', 'United States', 'US56K', '2019-08-24 08:40:26', 'ACTIVE'),
-(2, 'Henry Hart', 'M', '2002-01-01', 'savings', 'street 7', '000222', 'henry@ubank.me', 'bdb302f0856032ee1a69e129c38dce471a20b6a1', 'henry', 'United Kingdom', 'UK21C', '2019-08-24 08:46:37', 'ACTIVE');
+(1, 'Adam Ronald', 'M', '2001-01-01', 'current', 'street 5', '000113', 'adam@ubank.me', '561c62b788bde046b2f0731835fe9770bb44231f', 'adam', 'United States', 'US56K', '2019-08-31 12:47:39', 'ACTIVE'),
+(2, 'Henry Hart', 'M', '2002-01-01', 'savings', 'street 7', '000222', 'henry@ubank.me', 'bdb302f0856032ee1a69e129c38dce471a20b6a1', 'henry', 'United Kingdom', 'UK21C', '2019-08-26 11:31:45', 'ACTIVE');
 
 -- --------------------------------------------------------
 
@@ -260,7 +260,7 @@ ALTER TABLE `usersclosed`
 -- AUTO_INCREMENT for table `contacts`
 --
 ALTER TABLE `contacts`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `newusers`
 --

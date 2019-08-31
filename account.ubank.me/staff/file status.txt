@@ -11,9 +11,11 @@ Status of how much of the dashboard is done
 - admin-edit.php V
 - users.php V
 - users-edit.php V (combining customer-add, alter, approving, delete into edit)
-- settings.php
-- requests.php
-- questions.php
+- settings.php V
+- requests.php V
+- process.php V (combining process_contact, creditcard, mastercard, visacard and question into this file)
+- questions.php V
+- console.php
 
 !!! Make one 'admin' page where owner, admins and staff have access to:
 - Owner can: add/edit admins, staff and users (basically admin account but with all functions),

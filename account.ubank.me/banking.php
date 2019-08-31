@@ -26,6 +26,72 @@
 	$userdat_accstatus = $res[13];
 ?>
 
+<?php
+	if (isset($_REQUEST['transfer_funds'])){ // Transfer funds process
+		$t_amount = $_REQUEST['transfer_amount'];
+		$sender_id = $_SESSION["session_user_id"];
+		$reciever_id = $_REQUEST['receiver'];
+		
+		// Select last transaction id in reciever's passbook.
+		include '_inc/dbconn.php';
+		$sql = "SELECT MAX(transactionid) FROM UBankDAT.passbook".$reciever_id;
+		$result = mysql_query($sql) or die(mysql_error());
+		$rws = mysql_fetch_array($result);
+		$reciever_last_tid = $rws[0];
+		
+		// Select the details in the last row of reciever's passbook.
+		$sql = "SELECT * FROM UBankDAT.passbook".$reciever_id." WHERE transactionid='$reciever_last_tid'";
+		$result = mysql_query($sql) or die(mysql_error());
+		while ($rws = mysql_fetch_array($result)){
+			$r_amount = $rws[7];
+			$r_name = $rws[2];
+			$r_branch = $rws[3];
+			$r_ifsc = $rws[4];
+	    }
+    
+	    // Select the last transaction id in the sender's passbook
+	    $sql = "SELECT MAX(transactionid) FROM UBankDAT.passbook".$sender_id;
+	    $result = mysql_query($sql) or die(mysql_error());
+	    $rws = mysql_fetch_array($result);
+	    $sender_last_tid = $rws[0];
+	    
+	    //select the details in the last row of sender's passbook.
+	    $sql = "SELECT * FROM UBankDAT.passbook".$sender_id." WHERE transactionid='$sender_last_tid'";
+	    $result = mysql_query($sql) or die(mysql_error());
+	    while ($rws = mysql_fetch_array($result)) {
+			$s_amount = $rws[7];
+			$s_name = $rws[2];
+			$s_branch = $rws[3];
+			$s_ifsc = $rws[4];
+	    }
+	    
+	    $date = date('Y-m-d h:i');
+	    $s_total = $s_amount-$t_amount; // balance sender after transaction
+	    
+		// Check if balance is high enough to make the tranfer
+	    if ($t_amount<1){
+	        echo '<script>alert("You cannot transfer less than $1");';
+	        echo 'window.location= "banking";</script>';
+	    } elseif($s_total<0){
+	        echo '<script>alert("Your account balance is too low to proceed with this transfer.");';
+	        echo 'window.location= "banking";</script>';
+	    } else { 
+	        // insert statement into reciever passbook.
+	        $r_total = $r_amount + $t_amount;
+	        $sql1 = "INSERT INTO UBankDAT.passbook".$reciever_id." values('','$date','$r_name','$r_branch','$r_ifsc','$t_amount','0','$r_total','Payment from $s_name')";
+	        mysql_query($sql1) or die(mysql_error());
+	        
+	        // insert statement into sender passbook.
+	        $s_total = $s_amount - $t_amount;
+	        $sql2 = "INSERT INTO UBankDAT.passbook".$sender_id." values('','$date','$s_name','$s_branch','$s_ifsc','0','$t_amount','$s_total','Payment to $r_name')";
+	        mysql_query($sql2) or die(mysql_error());
+	        
+	        echo '<script>alert("Transfer Successful.");'; // CHANGE MESSAGE AND URL REDIRECT
+	        echo 'window.location = "banking";</script>';
+	    }
+	} else {
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -137,7 +203,7 @@
 					?>
 					<?php       
 					if($contact_senderid == $contact_id){
-						echo "<form action='process_transfer' method='POST'>";
+						echo "<form action='banking' method='POST'>";
 						echo "<table>";
 						echo "<tr><td>Select your reciepient: &nbsp;</td><td> <select class='form-control' name='receiver'>";
 
@@ -150,7 +216,7 @@
 						
 						echo "</td></tr></select>";
 						echo "<tr><td>Enter Amount: </td><td><input class='form-control' type='number' name='transfer_amount' placeholder='Amount (in $)' required></td></table>";
-						echo "<table><tr><td style='padding:5px;'><button class='btn btn-success' type='submit' class='btn' name='submitBtn'>Transfer Funds <i class='fas fa-hand-holding-usd'></i></button>
+						echo "<table><tr><td style='padding:5px;'><button class='btn btn-success' type='submit' class='btn' name='transfer_funds'>Transfer Funds <i class='fas fa-hand-holding-usd'></i></button>
 						</td></tr></table></form>"; 
 					} else {
 						echo "<i><p>You have no active contacts on this account. Please goto your <a href='contacts'>contacts</a> to make a transaction.</p></i>";
@@ -177,6 +243,7 @@
 						}            
 					?>
 					<span class="heading">Current Balance: $</span><b><?php echo $user_balance;?></b><br><br>
+					<span class="heading">Name on Card: </span><b><?php echo $userdat_name;?></b><br>
 					<span class="heading">Ifsc Code: </span><b><?php echo $userdat_branchcode;?></b><br>
 					<span class="heading">Country: </span><b><?php echo $userdat_branch;?></b><br>
 					<span class="heading">Your Account No: </span><b><?php echo $userdat_id;?></b>
@@ -220,7 +287,7 @@
                   </thead>
                   <tbody>
 					<?php
-                        while($rws=  mysql_fetch_array($result)){
+                        while($rws = mysql_fetch_array($result)){
                             
                             echo "<tr>";
                             echo "<td>".$rws[0]."</td>";
@@ -242,3 +309,5 @@
         </div><!-- /.container-fluid -->
 
     <?php include 'afooter.php' ?>
+
+<?php } ?>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 23, 2019 at 10:23 PM
+-- Generation Time: Aug 31, 2019 at 01:56 PM
 -- Server version: 5.6.37
 -- PHP Version: 5.6.31
 
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `passbook1` (
   `debit` int(10) DEFAULT NULL,
   `amount` float(15,2) DEFAULT NULL,
   `narration` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `passbook1`
@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `passbook2` (
   `debit` int(10) DEFAULT NULL,
   `amount` float(10,2) DEFAULT NULL,
   `narration` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `passbook2`
@@ -95,8 +95,8 @@ CREATE TABLE IF NOT EXISTS `questions` (
 INSERT INTO `questions` (`id`, `name`, `email`, `question`, `message`, `status`, `readby`, `askedby`, `time`) VALUES
 (2, 'John Doe', 'johndoe@gmail.com', 'Services', 'Hi, I would like to know more about the two account types and which one will suit me the best. I am trying to save some money for later. Greets, John', 'TO REVIEW', '', 'Homepage', '2019-01-20 08:44:25'),
 (6, 'John Watson', 'johnwatson@mail.com', 'Job', 'Hi, I would like to apply for a job at UBank. Could you please send me all the information I need to send to you?', 'TO REVIEW', '', 'Homepage', '2019-01-20 09:54:58'),
-(7, 'Bert Geertsen', 'bgeertsen@mail.com', 'Banking', 'Hello, I lost my password for my savings account. Could you please help me to recover it? I have all of my information ready and I can verify myself.', 'DOING', 'Dan Cody', 'Homepage', '2019-01-21 06:50:52'),
-(13, 'Adam Ronald', 'adam@ubank.me', '(C) Job', 'Hello, I was wondering how long exactly would it take to ship a ''visa card'' to me. I live in the US and need one, because my old one broke last night.', 'REVIEWED', 'Dan Cody', 'Support Panel', '2019-01-21 07:41:43');
+(7, 'Bert Geertsen', 'bgeertsen@mail.com', 'Banking', 'Hello, I lost my password for my savings account. Could you please help me to recover it? I have all of my information ready and I can verify myself.', 'TO REVIEW', '', 'Homepage', '2019-01-21 06:50:52'),
+(13, 'Adam Ronald', 'adam@ubank.me', 'Job', 'Hello, I was wondering how long exactly would it take to ship a ''visa card'' to me. I live in the US and need one, because my old one broke last night.', 'REVIEWED', 'James Carter', 'Support Panel', '2019-01-21 07:41:43');
 
 -- --------------------------------------------------------
 
@@ -145,7 +145,7 @@ CREATE TABLE IF NOT EXISTS `req_visacard` (
   `account_no` int(10) NOT NULL,
   `visacard_status` varchar(25) NOT NULL,
   `visacard_date` date NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `req_visacard`
@@ -202,12 +202,12 @@ ALTER TABLE `req_visacard`
 -- AUTO_INCREMENT for table `passbook1`
 --
 ALTER TABLE `passbook1`
-  MODIFY `transactionid` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `transactionid` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `passbook2`
 --
 ALTER TABLE `passbook2`
-  MODIFY `transactionid` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `transactionid` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `questions`
 --
@@ -227,7 +227,7 @@ ALTER TABLE `req_mastercard`
 -- AUTO_INCREMENT for table `req_visacard`
 --
 ALTER TABLE `req_visacard`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

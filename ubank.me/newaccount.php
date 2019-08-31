@@ -1,13 +1,44 @@
 <?php 
 	include '_inc/dbconn.php'; 
 ?>
+
+<?php
+	if (isset($_REQUEST['register_account'])){ // Submit contact form request
+		// getting variables to store in table
+		$firstname=  mysql_real_escape_string($_REQUEST['n_firstname']);
+		$surname=  mysql_real_escape_string($_REQUEST['n_surname']);
+		$fullname=  $firstname . ' ' . $surname;
+
+		$email= mysql_real_escape_string($_REQUEST['n_email']);
+		$gender=  mysql_real_escape_string($_REQUEST['n_gender']);
+		$dob=  mysql_real_escape_string($_REQUEST['n_dob']);
+		$address=  mysql_real_escape_string($_REQUEST['n_address']);
+		$phone=  mysql_real_escape_string($_REQUEST['n_phone']);
+		$type=  mysql_real_escape_string($_REQUEST['n_type']); // type of account: current or savings
+		$country= mysql_real_escape_string($_REQUEST['n_country']);
+
+		$pass1= mysql_real_escape_string($_REQUEST['n_newpass']);
+		$pass2= mysql_real_escape_string($_REQUEST['n_repeatpass']);
+
+		// insert question to table 'customernew'
+		if($pass1 == $pass2){
+			$insertsql = "insert into customernew values('','$fullname','$gender','$dob','$type','$address',
+			'$phone','$email','$pass1','$country')";
+			mysql_query($insertsql) or die(header('location:newaccount?error=1'));
+			header('location:newaccount?success=1');
+		} else {
+			header('location:newaccount?password=1');
+		}
+	} else {
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta name="description" content="Contact Us | UBank Online Banking">
 		<meta name="author" content="UBank Group">
 		
-		<title>Register New Account | UBank</title>
+		<title>Register New Account | UBank Online Banking</title>
 		
 	<!-- PHP header here -->
 	<?php include 'index-header.php'; ?>
@@ -38,7 +69,7 @@
 				<div class="col-lg-6">
 					<h1>Open New Account</h2>
 					<hr class=" accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 40%;">
-					<p>Placeholder text. </p><br>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla rhoncus pulvinar neque at sagittis. Maecenas elementum quam eu purus eleifend, pharetra eleifend diam tempor. Ut ultricies lectus sed diam placerat pharetra. Cras ornare rutrum enim. Praesent scelerisque, lectus sed hendrerit cursus, magna lectus tincidunt quam, sed volutpat felis dui ut dolor. Nunc finibus tincidunt tellus, a rutrum lorem. In ornare ligula in ligula scelerisque, faucibus imperdiet tellus posuere. Donec id metus suscipit ligula ultricies tempor. Aenean gravida egestas erat, sed venenatis arcu aliquet nec. Etiam fermentum odio ac pellentesque imperdiet. Aenean rhoncus gravida pellentesque. </p><br>
 					 <p><a class="btn btn-primary js-scroll-trigger" href="#openaccount" role="button">Open your account &raquo;</a><p>
 				</div>
 				<div class="col-lg-6">
@@ -54,15 +85,20 @@
 	<!-- create account form -->
 	  <div class="row contact bg-blue-light" id="openaccount">
 	    <div class="col-lg-1"></div>
-		<div class="col-lg-4">
+		<div class="col-lg-3">
 		  <h1>Create Account</h2>
 		  <hr class=" accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 40%;">
-		  <p>Please provide your real information as stated on your ID or Passport to make a valid banking account.<br><br>
-		  All of the fields on the right are required. </p><br><br>
+		  <p>When creating a new account, please keep in mind:<br>
+		  	<ul>
+		  		<li>Provide your <b>real information</b> as stated on your ID or Passport to make a valid banking account.</li>
+		  		<li>After submitting the form on the right your <b>request will be send to validation</b> and will be <b>approved</b> or <b>denied</b>.</li>
+		  		<li>Don't make <b>multiple accounts requests</b> with the same user information because they will be denied.</li>
+		  	</ul><br><br>
+		  <b>All of the fields on the right are required.</b></p><br><br>
 		</div>
 		<div class="col-lg-1"></div>
-		<div class="col-lg-5"><br><br>
-		  <form id="contact-form" method="post" action="newaccount-process.php" role="form">
+		<div class="col-lg-6"><br><br>
+		  <form method="POST" action="newaccount">
 			<div class="messages"></div>
 			<div class="controls">
 					<div class="row">
@@ -165,7 +201,7 @@
 							</div>
 						</div>
 						<div class="col-md-12">
-							<input type="submit" class="btn btn-success btn-send" value="Create account &raquo;">
+							<input type="submit" class="btn btn-success btn-send" name="register_account" value="Create account &raquo;">
 						</div>
 					</div>
 			 </div>
@@ -180,22 +216,22 @@
         <div class="row">
           <div class="col-md-3 col-sm-6">
             <a href="#">
-              <img class="img-fluid d-block mx-auto" src="vendor/img/partner_envato.png" alt="">
+              <img class="img-fluid d-block mx-auto" width="200px" height="50px" src="vendor/img/partner1.png" alt="">
             </a>
           </div>
           <div class="col-md-3 col-sm-6">
             <a href="#">
-              <img class="img-fluid d-block mx-auto" src="vendor/img/partner_designmodo.png" alt="">
+              <img class="img-fluid d-block mx-auto" width="150px" height="50px" src="vendor/img/partner2.png" alt="">
             </a>
           </div>
           <div class="col-md-3 col-sm-6">
             <a href="#">
-              <img class="img-fluid d-block mx-auto" src="vendor/img/partner_themeforest.png" alt="">
+              <img class="img-fluid d-block mx-auto" width="200px" height="50px" src="vendor/img/partner3.png" alt="">
             </a>
           </div>
           <div class="col-md-3 col-sm-6">
             <a href="#">
-              <img class="img-fluid d-block mx-auto" src="vendor/img/partner_creativemarket.png" alt="">
+              <img class="img-fluid d-block mx-auto" src="vendor/img/partner4.png" alt="">
             </a>
           </div>
         </div>
@@ -204,3 +240,5 @@
 
 	<!-- PHP footer here -->
 	<?php include 'index-footer.php' ?>
+
+<?php } ?>

@@ -4,7 +4,7 @@
 		<meta name="description" content="UBank Online Banking FAQ">
 		<meta name="author" content="UBank Group">
 		
-		<title>Frequently Asked Questions (FAQ) | UBank</title>
+		<title>Frequently Asked Questions (FAQ) | UBank Online Banking</title>
 		
 		<script type="text/javascript">
 			function Register() {
@@ -31,7 +31,7 @@
 				</div>
 				<div id="collapse1s1" class="panel-collapse collapse">
 					<div class="card-header">
-						Sadly not. UBank Online Banking is a fully working bank demo build with HTML, CSS, JavaScript, PHP & Mysql.
+						Sadly not 😄. UBank Online Banking is a fully working bank demonstration system build with HTML, CSS, JavaScript, PHP & MySQL. This system was developed while learning PHP & MySQL and may often get new updates/features when I learn something new.
 					</div>
 				</div>
 			</div>
@@ -43,7 +43,7 @@
 				</div>
 				<div id="collapse1s2" class="panel-collapse collapse">
 					<div class="card-header">
-						UBank Group is a fake parent company of UBank and holds all of the shares of UBank. 'UBank' is also used as a commercial name.
+						UBank Group is the fake 'parent company' of UBank and holds all of the shares of UBank. 'UBank' is also used as the commercial name of the system, while the name 'UBank Group' is used to describe the group of developers/employees at UBank.
 					</div>
 				</div>
 			</div>
@@ -55,7 +55,7 @@
 				</div>
 				<div id="collapse1s3" class="panel-collapse collapse">
 					<div class="card-header">
-						At the moment there is only 1 person working at UBank.
+						At the moment only 1 person works at UBank Online Banking. This is the developer (<a href="https://github.com/Tonemon" target="_blank">me</a>) of this project, who made this homepage, the User Control Panel, the Staff Panel and the database layouts.
 					</div>
 				</div>
 			</div>
@@ -67,10 +67,10 @@
 				</div>
 				<div id="collapse1s4" class="panel-collapse collapse">
 					<div class="card-header">
-						Please contact us if you want to apply for a job. At the moment we have two positions open:
+						Please contact us (<a href="http://ubank.me/contact">here</a>) if you want to apply for a job at the UBank Group. At the moment we have two positions open:
 						<ul>
-							<li>As a <b>staff member</b> you are in control of all the contact requests and card requests. </li>
-							<li>As an <b>admin member</b> you are in control of creating new customer and staff accounts and help people with updating their profile information.</li>
+							<li>As a <b>staff member</b> you are in control of all the contact requests, card requests and questions from the support section. </li>
+							<li>As an <b>admin member</b> you are in control of creating and maintaining access to all of the user and staff accounts and help people with updating their profile information.</li>
 						</ul>
 					</div>
 				</div>
@@ -78,16 +78,16 @@
 
 			
 		<!-- next faq section -->	
-        <div class="faqHeader"><i class="fas fa-info-circle"></i> About Online Banking</div>
+        <div class="faqHeader mt-5"><i class="fas fa-info-circle"></i> About Online Banking</div>
 			<div class="card">
 				<div class="card-header">
 					<h6 class="card-header">
-						<i class="fas fa-question-circle"></i> <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse2s1">How can I create a customer account?</a>
+						<i class="fas fa-question-circle"></i> <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse2s1">How can I create my own banking account?</a>
 					</h6>
 				</div>
 				<div id="collapse2s1" class="panel-collapse collapse">
 					<div class="card-header">
-						At the moment you can't create an account on your own. <br> Please contact us with your information and we will make an account for you.
+						You can create your banking account by going to the <a href="http://ubank.me/newaccount" target="_blank">register</a> page and filling out the form using your real information. After submitting, your account request will be validated and either approved or denied.
 					</div>
 				</div>
 			</div>
@@ -101,12 +101,11 @@
 					<div class="card-header">
 						If you remember your password please do the following:
 						<ul>
-							<li>Login into your customer account on <a href="http://account.ubank.me" target="_blank">account.ubank.me</a>.</li>
-							<li>Click the <i class="fas fa-fw fa-cogs"></i> settings icon in the menu on the left to goto your settings.</li>
-							<li>Change your password using the 'Change Password' section.</li>
+							<li>Login to your user account on <a href="http://account.ubank.me" target="_blank">account.ubank.me</a>.</li>
+							<li>Click the <i class="fas fa-fw fa-cogs"></i> Settings icon in the menu on the left to go to your settings panel.</li>
+							<li>Change your password by providing your information below the 'Change Password' section.</li>
 						</ul>
-						If you can't remember your password please contact your system administrator to change it. <br>You will be asked questions to verify that you are indeed the owner
-						of your customer account.
+						If you can't remember your password please contact us using the form on the <a href="http://ubank.me/contact">contact page</a>. <br>You will be asked questions to verify that you are indeed the owner of your account and when you succeed, you will be able to set a new password.
 					</div>
 				</div>
 			</div>
@@ -140,7 +139,7 @@
 				</div>
 				<div id="collapse2s4" class="panel-collapse collapse">
 					<div class="card-header">
-						There is <strong>no real currency</strong> used in any of the transactions you make. The balance of your account is displayed in <strong>USD</strong>, but it's <b>not</b> real money.
+						There is <strong>no real currency</strong> used in any of the transactions you make on UBank Online Banking, because this is a demonstration system. The balance of your account is displayed in <strong>USD</strong> dollars, but it's <b>not</b> real money from which you could go shopping online.
 					</div>
 				</div>
 			</div>
@@ -152,7 +151,7 @@
 				</div>
 				<div id="collapse2s5" class="panel-collapse collapse">
 					<div class="card-header">
-						No tax <i class="far fa-smile"></i>! We believe in tax-free transactions, so you (and your business partner) don't have to lose money in a transaction.
+						No tax <i class="far fa-smile"></i>! We believe in tax-free transactions, so you (and your business partner) don't have to loose any money while making a transaction. Your business partner will receive the exact amount of dollars you send them.
 						<br />
 					</div>
 				</div>
@@ -165,8 +164,7 @@
 				</div>
 				<div id="collapse2s6" class="panel-collapse collapse">
 					<div class="card-header">
-						When you use <b>a 'current' account</b>, your money can be used in loans. We will inform you when that is the case and you will get a small extra fee, because you participated. When using <b>a 'savings' account</b> 
-						your money will not be used in loans and you won't get the small extra fee. <br>We <b>always</b> make sure that transactions on both account types are secure. 
+						When you use <b>a 'current' account</b>, your money can be used in loans. We will inform you when that is the case and you will get a small extra fee, because you participated. When using <b>a 'savings' account</b> your money will not be used in loans and you won't get the small extra fee. <br>We <b>always</b> make sure that transactions on both account types are secure. 
 					</div>
 				</div>
 			</div>
@@ -178,8 +176,7 @@
 				</div>
 				<div id="collapse2s7" class="panel-collapse collapse">
 					<div class="card-header">
-						The minimum amount to make a transaction is 1$ and you obviously can't make a higher transaction than your account balance is. <br>
-						If you have 5$ or less on your account balance, you will get an alert with the information that it's recommended to make a deposit.
+						The minimum amount to make a transaction is 1$ and you obviously can't make a higher transaction than your account balance is. <br>If you have 5$ or less on your account balance, you will get an alert with the information that it's recommended to make a deposit. This is not required, but of course you can't make huge transfers with only 5 dollars.
 					</div>
 				</div>
 			</div>
@@ -191,8 +188,8 @@
 				</div>
 				<div id="collapse2s8" class="panel-collapse collapse">
 					<div class="card-header">
-						In case you moved or changed your personal information you could contact us and we will change the requested information.<br>
-						<i class="fas fa-exclamation-circle"></i> Keep in mind that we <b>cannot</b> change your <u>account type</u> (current or savings) or <u>account number</u>!
+						In case you moved to another country/city or changed your personal information you can <a href="http://ubank.me/contact">contact us</a> and we will change the requested information.<br><br>
+						<i class="fas fa-exclamation-circle"></i> Keep in mind that we <b>cannot change</b> your <u>account type</u> (current or savings), <u>account number</u> (for example 3) or ifsc code as it would make you loose your business partners.
 					</div>
 				</div>
 			</div>

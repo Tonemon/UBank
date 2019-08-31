@@ -3,8 +3,7 @@
 	<head>
 		<meta name="description" content="UBank Online Banking Homepage">
 		<meta name="author" content="UBank Group">
-		
-		<title>Homepage Online Banking | UBank</title>
+		<title>Homepage Online Banking | UBank Online Banking</title>
 		
 	<!-- PHP header here -->
 	<?php include 'index-header.php'; ?>
@@ -32,7 +31,7 @@
 		  <img class="d-block w-100" src="vendor/img/slideshow2.jpg" alt="Second slide">
 		  <div class="carousel-caption d-none d-md-block">
 			<h2>We care about our customers.</h2>
-			<p>We developed a new customer control panel to satisfy the needs of our customers.</p>
+			<p>We developed a new User Control Panel to make it easy to use and to satisfy the needs of our users.</p>
 			<p><a class="btn btn-primary js-scroll-trigger" href="#cpanel" role="button">Read more &raquo;</a><p>
 		  </div>
 		</div>
@@ -40,7 +39,7 @@
 		  <img class="d-block w-100" src="vendor/img/slideshow3.jpg" alt="Third slide">
 		  <div class="carousel-caption d-none d-md-block">
 			<h2>Innovative</h2>
-			<p>UBank is one of the most innovative banks in the world.</p>
+			<p>UBank is one of the most innovative banks in the world. We keep on implementing new features to satisfy our users.</p>
 			<p><a class="btn btn-primary js-scroll-trigger" href="#features" role="button">Read our Features &raquo;</a><p>
 		  </div>
 		</div>
@@ -59,31 +58,35 @@
 	<div class="row features bg-blue-light" id="features">
           <!-- <div class="col-lg-1"></div> -->
           <div class="col-lg-1"></div>
-          <div class="col-lg-5">
+          <div class="col-lg-4">
             <h2><i class="fas fa-feather"></i> Super light & Super fast</h2>
 			<hr class=" accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 50%;">
-            <p>UBank is one of the lightest banks out there and that makes us super fast. Make smooth transactions with your business partners every day (or at night) and we will make sure the funds will arrive quick and safe.</p>
+            <p>UBank is one of the lightest banks out there and that makes us super fast. Make smooth and easy transactions with your business partners every day (or at night) and we will make sure the funds will arrive on time and safe.</p>
 		  </div>
-          <div class="col-lg-5">
+          <div class="col-lg-3">
             <h2><i class="fas fa-lock"></i> Seriously Secure</h2>
 			<hr class=" accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 50%;">
-            <p>UBank takes security very seriously and it's our #1 priority. That's why we encrypt all of our customers passwords and make sure to regularely check for flaws in our systems to patch. </p>
+            <p>UBank takes security very seriously and it's our #1 priority. That's why we encrypt all of our users passwords and make sure to regularely check for flaws in our systems to patch. </p>
+          </div>
+          <div class="col-lg-3">
+            <h2><i class="fas fa-server"></i> 100% Uptime</h2>
+			<hr class=" accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 50%;">
+            <p>Our banking system is run on the best hardware in the world. We make sure to update regularly and keep our systems online at every moment. </p>
           </div>
 		  <div class="col-lg-1"></div>
     </div><!-- /.row -->
 	
 	<div class="container about" id="cpanel">
-	  <h1 class="mt-5"><i class="fas fa-server"></i> Our new Customer Panel</h1>
+	  <h1 class="mt-5"><i class="fas fa-server"></i> Our brand new User Control Panel</h1>
+	  <hr class="accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 55%;">
 	  <div class="row">
           <div class="col-md-6">
-			  <hr class="accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 25%;">
 			  <p>
-				We have developed a new and easy to use customer panel that contains every essential function you will need. The main functions (making transfers, your card details and your recent activity/transactions)
-				can be found on the homepage. Other functions (like your profile, contacts, or password reset) can be found in the sidemenu.<br><br> In the 'general information' section you will find your name, last login date, 
+				We have developed a new and easy to use User Control Panel which contains every essential function you will need. The main functions (based on making transfers, viewing card details and your recent activity/transactions) can be found on the homepage. Other functions (like your profile, contacts, or settings) can be found in the sidemenu.<br><br> In the 'general information' section you will find your name, last login date, 
 				the type of account you use and your account status. The information in the 'card details' section	can also be found on your UBank <i class="fab fa-cc-mastercard"></i> <b>Mastercard</b>, 
 				<i class="fas fa-credit-card"></i><b> Creditcard </b>or <i class="fab fa-cc-visa"></i><b> Visa Card</b>. <br><br>
-				<a class="btn btn-primary js-scroll-trigger" href="about" role="button">Read about us &raquo;</a>
-				<a class="btn btn-primary js-scroll-trigger" href="faq" role="button">Read our FAQ &raquo;</a><br>
+				<a class="btn btn-primary js-scroll-trigger" href="about" role="button">About us &raquo;</a>
+				<a class="btn btn-primary js-scroll-trigger" href="faq" role="button">Our FAQ &raquo;</a><br>
 			  </p>
           </div>
 		  <div class="col-md-6">
@@ -98,7 +101,7 @@
 		<div class="col-lg-8">
 			<div class="container">
             <h2><i class="fas fa-gift"></i> Register now and receive a gift!</h2>
-            <p>Apply for an account between now and 1 <?php echo date("F",strtotime("+3 Months")); ?> <?php echo date("Y"); ?> to recieve $5 cashback on your first transaction.*</p>
+            <p>Apply for an account between now and 1 <?php echo date("F",strtotime("+3 Months")); ?> <?php echo date("Y"); ?> to recieve $5 cashback on your first transaction.*<br><small><small>* Only applies to new users and users that signup for our newsletter.</small></small></p>
             </div>
 		</div>
         <div class="col-lg-3"><br>
@@ -112,17 +115,15 @@
 	  <div class="row">
           <div class="col-md-4">
 			  <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i> 4.5/5 Stars<br><br>
-			  <h4><i class="fas fa-quote-left"></i> Great for business.</h4>
-			  <p>
-				I make a lot of transfers on a regular basis and this is one of the first banks that makes it so easy and secure. I didn't have any problems so far. <i class="fas fa-quote-right"></i>
-			  </p>
+			  <h4><i class="fas fa-quote-left"></i> Great for big businesses.</h4>
+			  <p>I make a lot of transfers on a regular basis and this is one of the first banks that makes it so easy and secure to stay and pay online. I didn't have any problems so far and I really enjoy the 100% uptime. <i class="fas fa-quote-right"></i></p>
 			  <p class="font-weight-bold">Bert Jones <small>CEO at Emazon</small></p>
           </div>
 		  <div class="col-md-4">
 			  <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i> 5/5 Stars<br><br>
-			  <h4><i class="fas fa-quote-left"></i> Nice customer panel.</h4>
+			  <h4><i class="fas fa-quote-left"></i> Really nice User Panel.</h4>
 			  <p>
-				I really like the new customer panel, because all of the functions can be found easily and it's really fast (just as they advertised). Adding contacts to make transfers is easy and great solution to the scamming problem.  <i class="fas fa-quote-right"></i>
+				I really like the new User Control Panel, because all of the functions can be found easily and it's really fast (just as they advertised). Adding contacts to make transfers is easy and a great solution to the scamming problem. <i class="fas fa-quote-right"></i>
 			  </p>
 			  <p class="font-weight-bold">Bob Doe <small>Developer at Macrosoft</small></p>
           </div>
@@ -130,8 +131,8 @@
 			  <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i> 4.5/5 Stars<br><br>
 			  <h4><i class="fas fa-quote-left"></i> Excellent Support.</h4>
 			  <p>
-				I had two questions about how to make fund transfers and the customer support helped me in seconds. The FAQ is very usefull too, because it's well documented 
-				and the questions are easy to find.<i class="fas fa-quote-right"></i>
+				I had two questions about how to make fund transfers and the user support helped me in minutes. The FAQ is very usefull too, because it's well documented 
+				and answers on a lot of questions are easy to find. <i class="fas fa-quote-right"></i>
 			  </p>
 			  <p class="font-weight-bold">John Snow <small>Writer at Old York Times</small></p>
           </div>
@@ -144,22 +145,22 @@
         <div class="row">
           <div class="col-md-3 col-sm-6">
             <a href="#">
-              <img class="img-fluid d-block mx-auto" src="vendor/img/partner_envato.png" alt="">
+              <img class="img-fluid d-block mx-auto" width="200px" height="50px" src="vendor/img/partner1.png" alt="">
             </a>
           </div>
           <div class="col-md-3 col-sm-6">
             <a href="#">
-              <img class="img-fluid d-block mx-auto" src="vendor/img/partner_designmodo.png" alt="">
+              <img class="img-fluid d-block mx-auto" width="150px" height="50px" src="vendor/img/partner2.png" alt="">
             </a>
           </div>
           <div class="col-md-3 col-sm-6">
             <a href="#">
-              <img class="img-fluid d-block mx-auto" src="vendor/img/partner_themeforest.png" alt="">
+              <img class="img-fluid d-block mx-auto" width="200px" height="50px" src="vendor/img/partner3.png" alt="">
             </a>
           </div>
           <div class="col-md-3 col-sm-6">
             <a href="#">
-              <img class="img-fluid d-block mx-auto" src="vendor/img/partner_creativemarket.png" alt="">
+              <img class="img-fluid d-block mx-auto" src="vendor/img/partner4.png" alt="">
             </a>
           </div>
         </div>

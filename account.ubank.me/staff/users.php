@@ -177,7 +177,6 @@ if(!isset($_SESSION['session_staff_start']))
 						<input type="submit" class="btn btn-success" name="add_user" value="Add New User" class='adduser_button'/>
 					</form>
 				</div>
-				<div class="card-footer small text-muted">Updated <b>Today</b> at <?php echo date("H:i A (P)"); ?></div>
 			  </div>
 			</div>
 			<div class="col-xl-8 mb-6">
@@ -237,7 +236,6 @@ if(!isset($_SESSION['session_staff_start']))
 					<input type="submit" class="btn btn-danger" name="new_delete" value="Delete Customer Request" />
 				  </form>
 				</div>
-				<div class="card-footer small text-muted">Updated <b>Today</b> at <?php echo date("H:i A (P)"); ?></i></div>
 			  </div>
 			</div>
 		  </div> <!-- /.row -->
@@ -304,7 +302,6 @@ if(!isset($_SESSION['session_staff_start']))
 					<input type="submit" class="btn btn-warning" name="edit_user" value="Edit User" />
 					<a href="#" class="btn btn-danger" id="pagesDropdown" data-toggle="modal" data-target="#deleteModal" aria-haspopup="true">Delete User</a>
 				</div>
-				<div class="card-footer small text-muted">Updated <b>Today</b> at <?php echo date("H:i A (P)"); ?></div>
 			  </div>
 			</div>
 		  </div> <!-- /.row -->

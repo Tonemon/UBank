@@ -74,11 +74,11 @@
                     <i class="fas fa-user"></i>
                 </div>
 				<div class="card-body">
-					<span class="heading">Welcome </span><b><?php echo $staffdat_name; ?></b> <small>(<?php if ($staffdat_id == "1"){echo "owner";} else {echo "staff member";} ?>)</small>,<br>
+					<span class="heading">Welcome </span><b><?php echo $staffdat_name; ?></b> <small>(<?php if ($staffdat_id == "1"){echo "owner";} elseif ($staffdat_account == "admin") { echo "admin member"; } else { echo "staff member";} ?>)</small>,<br>
 					<span class="heading">Your Last login was on </span><b><?php echo $staffdat_lastlogin; ?></b>,<br>
-					<span class="heading">Your Email is: </span><b><?php echo $staffdat_email; ?></b> and this is your </span><b><?php if ($staffdat_account == "admin"){ echo "admin"; } else { echo $staffdat_account;} ?></b> account.
+					<span class="heading">Your Email is: <b><?php echo $staffdat_email; ?></b> and this is your </span><b><?php if ($staffdat_account == "admin"){ echo "admin"; } else { echo $staffdat_account;} ?></b> account.
 				</div>
-				<div class="card-footer small text-muted">Updated <b>Today</b> at <?php echo date("H:i A (P)"); ?></i></div>
+				<div class="card-footer small text-muted">Updated <b>Today</b> at <?php echo date("H:i A (P)"); ?></div>
 			  </div>
 			</div>
 			<?php if ($staffdat_account == "admin"){ ?>
@@ -104,7 +104,7 @@
 						</tr>
 						</tbody>
 					</table>
-					<small><i>Only an Admin/Owner can see this panel.</i></small>
+					<small><i>Only an Admin can see this panel.</i></small>
 				</div>
 			  </div>
 			</div>
@@ -122,18 +122,19 @@
 						<tbody>
 						<tr>
 							<td width="300px"><span class="heading"><b>Mastercard, Creditcard and Visacard requests</b>.</span><br><br></td>
-							<td><a href="requests" class="btn btn-success"><i class="fas fa-link"></i> Requests &raquo;</a><br><br></td>
+							<td><a href="requests?overview" class="btn btn-success"><i class="fas fa-link"></i> Requests &raquo;</a><br><br></td>
 						</tr>
 						<tr>
 							<td><span class="heading"><b>Support (questions) Panel</b>.</span></td>
-							<td><a href="questions" class="btn btn-success"><i class="fas fa-link"></i> Questions &raquo;</a></td>
+							<td><a href="questions?review" class="btn btn-success"><i class="fas fa-link"></i> Questions &raquo;</a></td>
 						</tr>
 						<tr>
 							<td><span class="heading"><b>Add/Edit/Delete Users</b>.</span><br></td>
-							<td><a href="edit/users?overview" class="btn btn-success"><i class="fas fa-link"></i> Users &raquo;</a><br></td>
+							<td><a href="users?overview" class="btn btn-success"><i class="fas fa-link"></i> Users &raquo;</a><br></td>
 						</tr>
 						</tbody>
 					</table>
+					<small><i>Only a staff member can see this panel.</i></small>
 				</div>
 			  </div>
 			</div>
