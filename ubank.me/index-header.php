@@ -5,10 +5,8 @@
     <!-- Bootstrap core CSS -->
     <link href="vendor/css/bootstrap.min.css" rel="stylesheet">
 
-	<!-- Custom fonts for this template-->
+	<!-- Custom fonts/css for this template-->
 	<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-		
-    <!-- Custom CSS -->
     <link href="vendor/css/custom.css" rel="stylesheet">
 
   </head>

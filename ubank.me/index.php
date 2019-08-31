@@ -8,8 +8,6 @@
 	<!-- PHP header here -->
 	<?php include 'index-header.php'; ?>
 	
-    <!-- Page Content -->
-	
 	<!-- Carousel -->
 	<div class="row">
 	<div  class=" carousel slide" id="ccontrol" data-ride="carousel">
@@ -56,8 +54,8 @@
 	</div>
 	
 	<div class="row features bg-blue-light" id="features">
-          <!-- <div class="col-lg-1"></div> -->
-          <div class="col-lg-1"></div>
+        <!-- <div class="col-lg-1"></div> -->
+        <div class="col-lg-1"></div>
           <div class="col-lg-4">
             <h2><i class="fas fa-feather"></i> Super light & Super fast</h2>
 			<hr class=" accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 50%;">
