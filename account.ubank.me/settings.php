@@ -128,7 +128,7 @@ if(!isset($_SESSION['session_user_start']))
 								<td>Category:</td>
 								<td>
 									<select class="form-control" name="q_type" required="required">
-										<option value=""></option>
+										<option value="">Select...</option>
 										<option value="Services">More information about us</option>
 										<option value="Banking">UBank Online Banking</option>
 										<option value="Bug">Exploit/Bug Found</option>
@@ -140,7 +140,7 @@ if(!isset($_SESSION['session_user_start']))
 						</table><br>
 						<p>Your Message<br>
 						<textarea class="form-control" type="text" name="q_message" rows="3" required="required" placeholder="Write your message here..."></textarea></p>
-						<input type="submit" class="btn btn-success" name="submit_question" value="Submit my Message"/>
+						<button type="submit" class="btn btn-success" name="submit_question"><i class="fas fa-check"></i> Submit my Message</button>
 					</form>
 				</div>
 			  </div>
@@ -169,7 +169,7 @@ if(!isset($_SESSION['session_user_start']))
 								<td><input class="form-control" type="password" name="again_password" required=""/></td>
 							</tr>
 						</table><br>
-						<input type="submit" class="btn btn-success" name="submit_password" value="Change my Password"/>
+						<button type="submit" class="btn btn-success" name="submit_password"><i class="fas fa-check"></i> Change my password</button>
 					</form>
 				</div>
 			  </div>

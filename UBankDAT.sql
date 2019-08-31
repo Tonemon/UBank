@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 31, 2019 at 01:56 PM
+-- Generation Time: Aug 31, 2019 at 08:59 PM
 -- Server version: 5.6.37
 -- PHP Version: 5.6.31
 
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `passbook1` (
   `debit` int(10) DEFAULT NULL,
   `amount` float(15,2) DEFAULT NULL,
   `narration` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `passbook1`
@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `passbook2` (
   `debit` int(10) DEFAULT NULL,
   `amount` float(10,2) DEFAULT NULL,
   `narration` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `passbook2`
@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `questions` (
   `readby` varchar(255) NOT NULL,
   `askedby` varchar(255) NOT NULL,
   `time` datetime NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `questions`
@@ -145,7 +145,7 @@ CREATE TABLE IF NOT EXISTS `req_visacard` (
   `account_no` int(10) NOT NULL,
   `visacard_status` varchar(25) NOT NULL,
   `visacard_date` date NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `req_visacard`
@@ -202,17 +202,17 @@ ALTER TABLE `req_visacard`
 -- AUTO_INCREMENT for table `passbook1`
 --
 ALTER TABLE `passbook1`
-  MODIFY `transactionid` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `transactionid` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `passbook2`
 --
 ALTER TABLE `passbook2`
-  MODIFY `transactionid` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `transactionid` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `req_creditcard`
 --
@@ -227,7 +227,7 @@ ALTER TABLE `req_mastercard`
 -- AUTO_INCREMENT for table `req_visacard`
 --
 ALTER TABLE `req_visacard`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

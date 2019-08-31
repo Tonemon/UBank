@@ -169,9 +169,9 @@
 				  General Information</div>
 				<div class="card-body">
 					<p>
-						<span class="heading">Welcome <b></span><?php echo $userdat_name;?></b> (user),<br>
-						<span class="heading">Your Last login was on <b></span><?php echo $userdat_lastlogin;?></b>,<br>
-						<span class="heading">Your Account status is <b></span><?php echo $userdat_accstatus;?></b> and it's your <b><?php echo $userdat_acctype;?></b> account.
+						<span class="heading">Welcome </span><b><?php echo $userdat_name;?></b> (user),<br>
+						<span class="heading">Your Last login was on </span><b><?php echo $userdat_lastlogin;?></b>,<br>
+						<span class="heading">Your Account status is </span><b><?php echo $userdat_accstatus;?></b> and it's your <b><?php echo $userdat_acctype;?></b> account.
 					</p>
 					<?php 
 					if ($acc_type) {
@@ -216,7 +216,7 @@
 						
 						echo "</td></tr></select>";
 						echo "<tr><td>Enter Amount: </td><td><input class='form-control' type='number' name='transfer_amount' placeholder='Amount (in $)' required></td></table>";
-						echo "<table><tr><td style='padding:5px;'><button class='btn btn-success' type='submit' class='btn' name='transfer_funds'>Transfer Funds <i class='fas fa-hand-holding-usd'></i></button>
+						echo "<table><tr><td style='padding:5px;'><button class='btn btn-success' type='submit' class='btn' name='transfer_funds'>Transfer Funds <i class='fas fa-paper-plane'></i></button>
 						</td></tr></table></form>"; 
 					} else {
 						echo "<i><p>You have no active contacts on this account. Please goto your <a href='contacts'>contacts</a> to make a transaction.</p></i>";
@@ -243,7 +243,7 @@
 						}            
 					?>
 					<span class="heading">Current Balance: $</span><b><?php echo $user_balance;?></b><br><br>
-					<span class="heading">Name on Card: </span><b><?php echo $userdat_name;?></b><br>
+					<span class="heading">Official Names: </span><b><?php echo $userdat_name;?></b><br>
 					<span class="heading">Ifsc Code: </span><b><?php echo $userdat_branchcode;?></b><br>
 					<span class="heading">Country: </span><b><?php echo $userdat_branch;?></b><br>
 					<span class="heading">Your Account No: </span><b><?php echo $userdat_id;?></b>
@@ -281,7 +281,7 @@
                       <th>Description</th>
                       <th>Credit (deposited)</th>
                       <th>Debit (withdrawn/transfered)</th>
-                      <th>Balance (amount)</th>
+                      <th>Balance after</th>
 					  <th>Transaction Date</th>
                     </tr>
                   </thead>
@@ -303,7 +303,7 @@
                 </table>
               </div>
             </div>
-            <div class="card-footer small text-muted">Updated <b>Today</b> at <?php echo date("H:i A (P)"); ?></i></div>
+            <div class="card-footer small text-muted">Updated <b>Today</b> at <?php echo date("H:i A (P)"); ?></div>
           </div>
 
         </div><!-- /.container-fluid -->

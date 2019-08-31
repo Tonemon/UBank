@@ -181,7 +181,7 @@ if(!isset($_SESSION['session_user_start']))
 					  </tbody>
 					</table>
 					<p><i class="fas fa-info-circle"></i> <i>You can re-add the same contact if you deleted it on accident.</i></p>
-					<a href="#" class="btn btn-danger" id="pagesDropdown" data-toggle="modal" data-target="#deleteContactModal" aria-haspopup="true">Delete Contact</a>
+					<a href="#" class="btn btn-danger" id="pagesDropdown" data-toggle="modal" data-target="#deleteContactModal" aria-haspopup="true"><i class="fas fa-trash-alt"></i> Delete Contact</a>
 					</div>
 				</div>
 			  </div>
@@ -200,7 +200,7 @@ if(!isset($_SESSION['session_user_start']))
 				  <div class="modal-body">Are you sure you want to delete this contact? You can re-add the same contact when deleted on accident.</div>
 				  <div class="modal-footer">
 					<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-					<input type="submit" class="btn btn-danger" name="contact_delete" value="Delete Contact" />
+					<button type="submit" class="btn btn-danger" name="contact_delete"><i class="fas fa-trash-alt"></i> Delete Contact</button>
 					</form>
 				  </div>
 				</div>
@@ -229,8 +229,8 @@ if(!isset($_SESSION['session_user_start']))
 								<option value='Netherlands'>Netherlands (NL)</option>
 							</select></td></tr>
 						</table><br>
-						<input type="submit" class="btn btn-success" name="contact_add" value="Add New Contact">
-						<a href="#" class="btn btn-warning" id="pagesDropdown" data-toggle="modal" data-target="#informationModal">Help!</a>
+						<button type="submit" class="btn btn-success" name="contact_add"><i class="fas fa-check"></i> Add New Contact</button>
+						<a href="#" class="btn btn-warning" id="pagesDropdown" data-toggle="modal" data-target="#informationModal"><i class="fas fa-life-ring"></i> Help</a>
 					</form><br>
 					<i><p><i class='fas fa-info-circle'></i> Give your Card details to the person you are doing business with so he can transfer the funds to you.</p></i>
 				</div>

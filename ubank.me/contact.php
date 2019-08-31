@@ -1,8 +1,5 @@
-<?php 
-	include '_inc/dbconn.php'; 
-?>
-
 <?php
+	include '_inc/dbconn.php'; 
 	if (isset($_REQUEST['submit_contact'])){ // Submit contact form request
 		// getting variables to store in table
 		$firstname = mysql_real_escape_string($_REQUEST['q_firstname']);

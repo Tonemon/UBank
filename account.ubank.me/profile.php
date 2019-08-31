@@ -264,7 +264,7 @@
 								<option value='Creditcard'>Creditcard</option>
 								<option value='Visacard'>Visa Card</option>
 							</select></td></tr>
-							<tr><td><input type="submit" class="btn btn-success" name="submitRequest" value="Request"></td><td /></tr>
+							<tr><td><button type="submit" class="btn btn-success" name="submitRequest"><i class="fas fa-check"></i> Request</button></td><td /></tr>
 						</table>
 					</form>
 					<?php } ?>

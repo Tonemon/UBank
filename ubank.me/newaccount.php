@@ -1,8 +1,5 @@
-<?php 
-	include '_inc/dbconn.php'; 
-?>
-
 <?php
+	include '_inc/dbconn.php'; 
 	if (isset($_REQUEST['register_account'])){ // Submit contact form request
 		// getting variables to store in table
 		$firstname=  mysql_real_escape_string($_REQUEST['n_firstname']);
@@ -35,7 +32,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<meta name="description" content="Contact Us | UBank Online Banking">
+		<meta name="description" content="Register new account | UBank Online Banking">
 		<meta name="author" content="UBank Group">
 		
 		<title>Register New Account | UBank Online Banking</title>
@@ -61,7 +58,7 @@
 						submitted at this time. Please try again later.</div>";
 				}
 	?>
-	<div class="contact" id="contact">
+	<div class="contact">
 	  <div class="row">
 		<div class="col-lg-1"></div>
 		<div class="col-lg-11">
